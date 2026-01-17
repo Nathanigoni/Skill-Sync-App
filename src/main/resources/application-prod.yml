@@ -1,0 +1,16 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://admin:admin123@cluster0.urj1ywd.mongodb.net/skillsync?retryWrites=true&w=majority&appName=Cluster0
+
+logging:
+  level:
+    com.skillsync: INFO
+    org.springframework: WARN
+
+server:
+  port: ${PORT:8080}
+
+app:
+  cors:
+    allowed-origins: ${ALLOWED_ORIGINS}
