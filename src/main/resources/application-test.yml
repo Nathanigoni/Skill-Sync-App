@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://admin:admin123@cluster0.urj1ywd.mongodb.net/skillsync?retryWrites=true&w=majority&appName=Cluster0
+      uri: mongodb://localhost:27017/skillsync
 logging:
   level:
     com.skillsync: WARN
