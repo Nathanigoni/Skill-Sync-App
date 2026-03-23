@@ -1,3 +1,5 @@
+import api from './api'
+
 export const githubService = {
   async getGitHubStats(username) {
     const response = await api.get(`/github/stats/${username}`)

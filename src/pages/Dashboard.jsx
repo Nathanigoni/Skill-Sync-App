@@ -47,7 +47,6 @@ const Dashboard = () => {
     try {
       await analyticsService.syncGitHubData()
       await fetchGitHubStats()
-      // Add a subtle animation effect
       document.querySelectorAll('.stat-card').forEach(card => {
         card.classList.add('pulse')
         setTimeout(() => card.classList.remove('pulse'), 1000)
@@ -109,33 +108,30 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-8">
-      {/* Welcome Section with Glass Morphism */}
+      {/* Welcome Section */}
       <div className="relative">
         <div className="absolute inset-0 bg-gradient-to-r from-[#1C0F13] via-[#6E7E85] to-[#1C0F13] rounded-3xl opacity-5"></div>
         <div className="relative p-8">
+          {/* FIX: was user?.profile?.name — user object is flat, so use user?.name */}
           <h1 className="text-4xl font-bold bg-gradient-to-r from-[#1C0F13] to-[#6E7E85] bg-clip-text text-transparent mb-2">
-            Welcome back, {user?.profile?.name}!
+            Welcome back, {user?.name || user?.email?.split('@')[0]}!
           </h1>
           <p className="text-[#6E7E85] text-lg">
-            Your portfolio is performing exceptionally well today. 
+            Your portfolio is performing exceptionally well today.
             <span className="text-[#B7CECE] font-semibold"> Keep up the great work!</span>
           </p>
         </div>
       </div>
 
-      {/* Enhanced Stats Grid with Hover Effects */}
+      {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {statCards.map((stat, index) => (
-          <Card 
-            key={index} 
+          <Card
+            key={index}
             className="stat-card p-6 relative overflow-hidden group hover:transform hover:scale-105 transition-all duration-300 cursor-pointer"
           >
-            {/* Animated background */}
             <div className={`absolute inset-0 ${stat.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-            
-            {/* Gradient border effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#B7CECE]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            
             <div className="relative z-10">
               <div className="flex items-center justify-between">
                 <div>
@@ -154,15 +150,13 @@ const Dashboard = () => {
         ))}
       </div>
 
-      {/* GitHub Stats - Completely Redesigned */}
+      {/* GitHub Stats */}
       {user?.githubUsername && (
         <Card className="p-8 relative overflow-hidden border border-[#E2E2E2] hover:border-[#B7CECE] transition-all duration-300">
-          {/* Background pattern */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#B7CECE] rounded-full -translate-y-16 translate-x-16"></div>
             <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#BBBAC6] rounded-full translate-y-12 -translate-x-12"></div>
           </div>
-          
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-6">
               <div>
@@ -171,7 +165,7 @@ const Dashboard = () => {
                 </h2>
                 <p className="text-[#6E7E85]">Real-time development insights</p>
               </div>
-              <Button 
+              <Button
                 className="bg-gradient-to-r from-[#B7CECE] to-[#BBBAC6] hover:from-[#BBBAC6] hover:to-[#B7CECE] text-[#1C0F13] border-0 shadow-lg hover:shadow-xl transition-all duration-300"
                 onClick={handleSyncGitHub}
                 disabled={syncing}
@@ -180,7 +174,7 @@ const Dashboard = () => {
                 {syncing ? 'Syncing...' : 'Sync Data'}
               </Button>
             </div>
-            
+
             {githubStats ? (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {[
@@ -205,7 +199,7 @@ const Dashboard = () => {
                 </div>
                 <h3 className="text-xl font-semibold text-[#1C0F13] mb-2">Connect Your GitHub</h3>
                 <p className="text-[#6E7E85] mb-6">Showcase your development activity and contributions</p>
-                <Button 
+                <Button
                   className="bg-gradient-to-r from-[#B7CECE] to-[#BBBAC6] hover:from-[#BBBAC6] hover:to-[#B7CECE] text-[#1C0F13] border-0"
                   onClick={fetchGitHubStats}
                 >
@@ -217,19 +211,17 @@ const Dashboard = () => {
         </Card>
       )}
 
-      {/* Projects Section - Premium Redesign */}
+      {/* Projects Section */}
       <Card className="p-8 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#B7CECE] to-[#BBBAC6] rounded-full -translate-y-10 translate-x-10 opacity-10"></div>
-        
         <h2 className="text-2xl font-bold bg-gradient-to-r from-[#1C0F13] to-[#6E7E85] bg-clip-text text-transparent mb-6">
           Recent Projects
         </h2>
-        
         {projects.length > 0 ? (
           <div className="space-y-4">
-            {projects.slice(0, 3).map((project, index) => (
-              <div 
-                key={project.id} 
+            {projects.slice(0, 3).map((project) => (
+              <div
+                key={project.id}
                 className="flex items-center justify-between p-6 bg-gradient-to-r from-white to-[#E2E2E2]/30 rounded-2xl border border-[#E2E2E2] hover:border-[#B7CECE] hover:shadow-lg transition-all duration-300 group"
               >
                 <div className="flex items-center space-x-4">
@@ -249,7 +241,7 @@ const Dashboard = () => {
                     <span className="text-[#B7CECE] font-semibold">{project.clickCount || 0} clicks</span>
                   </div>
                   <div className="w-full bg-[#E2E2E2] rounded-full h-2 mt-2">
-                    <div 
+                    <div
                       className="bg-gradient-to-r from-[#B7CECE] to-[#BBBAC6] h-2 rounded-full transition-all duration-500"
                       style={{ width: `${Math.min(((project.clickCount || 0) / (project.viewCount || 1)) * 100, 100)}%` }}
                     ></div>
@@ -265,8 +257,8 @@ const Dashboard = () => {
             </div>
             <h3 className="text-xl font-semibold text-[#1C0F13] mb-2">No Projects Yet</h3>
             <p className="text-[#6E7E85] mb-6">Start building your portfolio with amazing projects</p>
-            <a 
-              href="/projects" 
+            <a
+              href="/projects"
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#B7CECE] to-[#BBBAC6] text-[#1C0F13] font-semibold rounded-2xl hover:shadow-lg transition-all duration-300"
             >
               Create First Project
