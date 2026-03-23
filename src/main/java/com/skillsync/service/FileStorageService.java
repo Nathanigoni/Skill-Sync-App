@@ -8,34 +8,34 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
 @Service
 public class FileStorageService {
 
-    @Value("${file.upload-dir:uploads}")
+    @Value("${file.upload-dir}")
     private String uploadDir;
 
-    public String storeFile(MultipartFile file) {
-        try {
-            // Create uploads directory if it doesn't exist
-            Path uploadPath = Paths.get(uploadDir);
-            if (!Files.exists(uploadPath)) {
-                Files.createDirectories(uploadPath);
-            }
+    public String storeFile(MultipartFile file) throws IOException {
+        // Create unique filename
+        String originalFileName = file.getOriginalFilename();
+        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+        String fileName = UUID.randomUUID().toString() + fileExtension;
 
-            // Generate unique filename
-            String filename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-            Path filePath = uploadPath.resolve(filename);
+        // Create upload directory if it doesn't exist
+        Path uploadPath = Paths.get(uploadDir).toAbsolutePath().normalize();
+        Files.createDirectories(uploadPath);
 
-            // Save file
-            Files.copy(file.getInputStream(), filePath);
+        // Store file
+        Path targetLocation = uploadPath.resolve(fileName);
+        Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-            // Return accessible URL (in production, use CDN/cloud storage)
-            return "/uploads/" + filename;
+        return fileName;
+    }
 
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to store file: " + e.getMessage());
-        }
+    public void deleteFile(String fileName) throws IOException {
+        Path filePath = Paths.get(uploadDir).toAbsolutePath().normalize().resolve(fileName);
+        Files.deleteIfExists(filePath);
     }
 }

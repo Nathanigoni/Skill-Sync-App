@@ -25,13 +25,17 @@ public class GitHubDataScheduler {
     public void updateAllUsersGitHubData() {
         log.info("Starting scheduled GitHub data update...");
 
-        userRepository.findAll().forEach(user -> {
-            if (user.getGithubUsername() != null && !user.getGithubUsername().isEmpty()) {
+        // FIX 7: Was findAll() with a manual null-check inside the loop.
+        // Now uses findByGithubUsernameIsNotNull() — the repository query
+        // already filters at the database level, so only relevant users are
+        // loaded into memory. Consistent with extractSkillsForActiveUsers below.
+        userRepository.findByGithubUsernameIsNotNull().forEach(user -> {
+            // Extra isEmpty guard kept for safety (empty-string usernames)
+            if (!user.getGithubUsername().isEmpty()) {
                 try {
                     gitHubService.syncUserGitHubData(user.getId());
                     log.info("Successfully updated GitHub data for user: {}", user.getGithubUsername());
-
-                    Thread.sleep(2000); // 2second delay between users
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                     log.warn("GitHub data update was interrupted");
@@ -49,11 +53,11 @@ public class GitHubDataScheduler {
         log.info("Starting scheduled skill extraction...");
 
         userRepository.findByGithubUsernameIsNotNull().forEach(user -> {
-            if (user.getGithubUsername() != null && !user.getGithubUsername().isEmpty()) {
+            if (!user.getGithubUsername().isEmpty()) {
                 try {
                     skillExtractionService.extractSkillsFromGitHub(user.getId());
                     log.info("Skills extracted for user: {}", user.getGithubUsername());
-                    Thread.sleep(5000); // 5second delay for rate limiting
+                    Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                     log.warn("Skill extraction was interrupted");

@@ -8,8 +8,16 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+// FIX 9:  Added @NoArgsConstructor and @AllArgsConstructor — MongoDB's deserialization
+//         requires a no-args constructor; without it, reading documents from the
+//         database throws a MappingInstantiationException at runtime.
+// FIX 10: Engagement counters (likes, shares, comments, views) changed from boxed
+//         Integer to primitive int. They can never meaningfully be null, and using
+//         Integer caused NullPointerExceptions when incrementing (e.g. post.getLikes() + 1)
+//         if a document was saved before those fields were initialised.
 @Data
 @Builder
 @NoArgsConstructor
@@ -20,31 +28,35 @@ public class Post {
     private String id;
     private String userId;
 
-    // Post content
     private String content;
-    private List<String> images; // URLs to uploaded images
-    private String articleTitle; // For LinkedIn-style articles
-    private String articleContent; // Long-form content
+    private List<String> images;
+    private String articleTitle;
+    private String articleContent;
     private List<String> tags;
     private String codeSnippet;
     private String language;
 
-    // Engagement metrics
-    private Integer likes;
-    private Integer shares;
-    private Integer comments;
-    private Integer views;
+    // FIX 10: primitive int with @Builder.Default so the builder always starts at 0
+    @Builder.Default
+    private int likes = 0;
+    @Builder.Default
+    private int shares = 0;
+    @Builder.Default
+    private int comments = 0;
+    @Builder.Default
+    private int views = 0;
 
-    // Timestamps
+    // Track which users have liked this post (for toggle support added in FeedService)
+    @Builder.Default
+    private List<String> likedBy = new ArrayList<>();
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    // Embedded user info
     private String userAvatar;
     private String userName;
     private String userGithubUsername;
 
-    // Post type
     private PostType postType;
 
     public enum PostType {
