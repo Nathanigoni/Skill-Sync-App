@@ -22,6 +22,10 @@ const Profile = () => {
   const [loading, setLoading] = useState(false)
   const [syncing, setSyncing] = useState(false)
   const [githubUsername, setGithubUsername] = useState('')
+  const connectedGitHubUsername =
+    (typeof user?.githubUsername === 'string' && user.githubUsername.trim()
+      ? user.githubUsername.trim()
+      : localStorage.getItem('githubUsername') || '') || ''
 
   useEffect(() => {
     if (user?.profile) {
@@ -36,11 +40,14 @@ const Profile = () => {
         }
       })
     }
-    if (user?.githubUsername) {
-      setGithubUsername(user.githubUsername)
-      fetchGitHubStats(user.githubUsername)
+    if (connectedGitHubUsername) {
+      setGithubUsername(connectedGitHubUsername)
+      fetchGitHubStats(connectedGitHubUsername)
+      if (!user?.githubUsername) {
+        updateUser?.({ githubUsername: connectedGitHubUsername })
+      }
     }
-  }, [user])
+  }, [user, connectedGitHubUsername, updateUser])
 
   const fetchGitHubStats = async (username) => {
     const targetUsername =
@@ -88,6 +95,7 @@ const Profile = () => {
 
       setGithubUsername(connectedUsername)
       updateUser?.({ githubUsername: connectedUsername })
+      localStorage.setItem('githubUsername', connectedUsername)
       alert('GitHub account connected successfully!')
       await fetchGitHubStats(connectedUsername)
     } catch (error) {
@@ -236,20 +244,15 @@ const Profile = () => {
               <h3 className="text-lg font-bold text-zinc-100">GitHub Integration</h3>
             </div>
             
-            {!user?.githubUsername ? (
+            {!connectedGitHubUsername ? (
               <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-zinc-100 mb-2">
-                    GitHub Username
-                  </label>
-                  <input
-                    type="text"
-                    value={githubUsername}
-                    onChange={(e) => setGithubUsername(e.target.value)}
-                    className="w-full px-3 py-2 border border-zinc-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
-                    placeholder="Enter GitHub username"
-                  />
-                </div>
+                <Input
+                  label="GitHub Username"
+                  icon={Github}
+                  value={githubUsername}
+                  onChange={(e) => setGithubUsername(e.target.value)}
+                  placeholder="Enter GitHub username"
+                />
                 <Button 
                   onClick={handleConnectGitHub} 
                   className="w-full bg-gradient-to-r from-indigo-500 to-indigo-400 text-white font-semibold hover:shadow-md transition-all"
@@ -268,7 +271,7 @@ const Profile = () => {
                     </div>
                     <div>
                       <p className="font-semibold text-zinc-100 text-sm">Connected</p>
-                      <p className="text-zinc-400 text-sm">@{user.githubUsername}</p>
+                      <p className="text-zinc-400 text-sm">@{connectedGitHubUsername}</p>
                     </div>
                   </div>
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
