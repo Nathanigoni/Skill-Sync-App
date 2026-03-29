@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { feedService } from '../services/feed'
-import { Code2, BarChart3, Users, ArrowRight, Star, Heart, MessageCircle, Share, MoreHorizontal, Send, Image, FileText, Type, Code } from 'lucide-react'
+import { Code2, BarChart3, Users, Heart, MessageCircle, Share, Send, Star, Type, Image, FileText, Code } from 'lucide-react'
 import Card from '../components/ui/Card'
 import Button from '../components/ui/Button'
 import Input from '../components/ui/Input'
+
+// FIX: Removed all duplicate post state and handlers that conflicted with PostContext.
+// Home now uses PostContext (via usePosts) as the single source of truth for posts,
+// identical to Feed.jsx — no more two separate systems running in parallel.
 
 const Home = () => {
   const { user } = useAuth()
@@ -13,7 +17,6 @@ const Home = () => {
   const [activeTab, setActiveTab] = useState('text')
   const [loading, setLoading] = useState(false)
 
-  // Post states
   const [textContent, setTextContent] = useState('')
   const [textTags, setTextTags] = useState('')
   const [imageContent, setImageContent] = useState('')
@@ -229,7 +232,7 @@ const Home = () => {
       {/* Main Content Grid */}
       <div className="container mx-auto px-6 py-8">
         <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          
+
           {/* Left Column - Hero & Features */}
           <div className="lg:col-span-1 space-y-8">
             {/* Hero Section */}

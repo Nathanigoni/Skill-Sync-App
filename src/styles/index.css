@@ -1,36 +1,50 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@200;300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  * {
+    @apply border-transparent;
+  }
+  
   body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    @apply bg-zinc-950 text-zinc-200;
+    @apply bg-zinc-950 text-zinc-100 antialiased;
+  }
+  
+  ::selection {
+    @apply bg-indigo-400/30 text-zinc-100;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-zinc-900/80 backdrop-blur-lg border border-zinc-800 shadow-glass rounded-3xl;
+    @apply bg-zinc-900/60 backdrop-blur-xl rounded-2xl border border-zinc-800;
   }
   
-  .btn-primary {
-    @apply bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-3 px-6 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-smooth;
+  .kinetic-gradient {
+    background: linear-gradient(135deg, #aaffdc 0%, #00fdc1 100%);
+    @apply text-zinc-950;
   }
   
-  .btn-secondary {
-    @apply bg-zinc-800 hover:bg-zinc-700 text-white font-medium py-3 px-6 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-smooth;
+  .kinetic-gradient-hover:hover {
+    background: linear-gradient(135deg, #00fdc1 0%, #aaffdc 100%);
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
   }
   
-  .input-field {
-    @apply w-full px-4 py-3 bg-zinc-900 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 placeholder-zinc-500;
+  .hover-lift {
+    @apply transition-all duration-200;
   }
   
-  .nav-link {
-    @apply flex items-center space-x-3 px-4 py-3 rounded-2xl text-zinc-400 hover:bg-zinc-900 hover:text-white transition-all duration-300;
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    @apply bg-zinc-900/50;
   }
   
-  .nav-link.active {
-    @apply bg-zinc-900 text-white shadow-smooth;
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-indigo-400/50;
   }
 }

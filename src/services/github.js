@@ -62,7 +62,6 @@ const fetchPublicGitHubStats = async (username) => {
     lastSynced: new Date().toISOString(),
   }
 }
-
 export const githubService = {
   async getGitHubStats(username) {
     const trimmed = typeof username === 'string' ? username.trim() : ''

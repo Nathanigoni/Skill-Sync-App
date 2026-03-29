@@ -47,7 +47,6 @@ const Dashboard = () => {
     try {
       await analyticsService.syncGitHubData(user?.githubUsername)
       await fetchGitHubStats()
-      // Add a subtle animation effect
       document.querySelectorAll('.stat-card').forEach(card => {
         card.classList.add('pulse')
         setTimeout(() => card.classList.remove('pulse'), 1000)
@@ -109,12 +108,12 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-8">
-      {/* Welcome Section with Glass Morphism */}
+      {/* Welcome Section */}
       <div className="relative">
         <div className="absolute inset-0 bg-gradient-to-r from-zinc-900 via-zinc-400 to-zinc-900 rounded-3xl opacity-5"></div>
         <div className="relative p-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-zinc-900 to-zinc-400 bg-clip-text text-transparent mb-2">
-            Welcome back, {user?.profile?.name}!
+            Welcome back, {user?.profile?.name || user?.name || user?.email?.split('@')?.[0]}!
           </h1>
           <p className="text-zinc-400 text-lg">
             Your portfolio is performing exceptionally well today. 
@@ -123,19 +122,16 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Enhanced Stats Grid with Hover Effects */}
+      {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {statCards.map((stat, index) => (
-          <Card 
-            key={index} 
+          <Card
+            key={index}
             className="stat-card p-6 relative overflow-hidden group hover:transform hover:scale-105 transition-all duration-300 cursor-pointer"
           >
-            {/* Animated background */}
             <div className={`absolute inset-0 ${stat.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
             
-            {/* Gradient border effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            
             <div className="relative z-10">
               <div className="flex items-center justify-between">
                 <div>
@@ -154,15 +150,13 @@ const Dashboard = () => {
         ))}
       </div>
 
-      {/* GitHub Stats - Completely Redesigned */}
+      {/* GitHub Stats */}
       {user?.githubUsername && (
         <Card className="p-8 relative overflow-hidden border border-zinc-800 hover:border-indigo-400 transition-all duration-300">
-          {/* Background pattern */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-400 rounded-full -translate-y-16 translate-x-16"></div>
             <div className="absolute bottom-0 left-0 w-24 h-24 bg-indigo-300 rounded-full translate-y-12 -translate-x-12"></div>
           </div>
-          
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-6">
               <div>
@@ -180,7 +174,7 @@ const Dashboard = () => {
                 {syncing ? 'Syncing...' : 'Sync Data'}
               </Button>
             </div>
-            
+
             {githubStats ? (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {[
@@ -217,14 +211,13 @@ const Dashboard = () => {
         </Card>
       )}
 
-      {/* Projects Section - Premium Redesign */}
+      {/* Projects Section */}
       <Card className="p-8 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-indigo-400 to-indigo-300 rounded-full -translate-y-10 translate-x-10 opacity-10"></div>
         
         <h2 className="text-2xl font-bold bg-gradient-to-r from-zinc-900 to-zinc-400 bg-clip-text text-transparent mb-6">
           Recent Projects
         </h2>
-        
         {projects.length > 0 ? (
           <div className="space-y-4">
             {projects.slice(0, 3).map((project) => (
