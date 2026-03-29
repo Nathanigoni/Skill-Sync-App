@@ -1,0 +1,16 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/skillsync
+
+logging:
+  level:
+    com.skillsync: INFO
+    org.springframework: WARN
+
+server:
+  port: ${PORT:8080}
+
+app:
+  cors:
+    allowed-origins: ${ALLOWED_ORIGINS}

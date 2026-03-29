@@ -1,0 +1,11 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/skillsync
+logging:
+  level:
+    com.skillsync: WARN
+
+app:
+  jwt:
+    secret: test-jwt-secret
