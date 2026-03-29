@@ -14,11 +14,27 @@ import Profile from './pages/Profile'
 import Skills from './pages/Skills'
 import ProtectedRoute from './components/shared/ProtectedRoute'
 
+function ComingSoon({ title }) {
+  return (
+    <div className="max-w-3xl mx-auto">
+      <div className="border border-zinc-800 bg-zinc-900 rounded-2xl p-8">
+        <h1 className="text-2xl font-bold text-zinc-100">{title}</h1>
+        <p className="text-zinc-400 mt-2">This page is coming soon.</p>
+      </div>
+    </div>
+  )
+}
+
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <div className="min-h-screen bg-[#151517]">
+      <Router
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
+        <div className="min-h-screen bg-zinc-950">
           <Header />
           <div className="flex">
             <Sidebar />
@@ -55,6 +71,32 @@ function App() {
                     <Skills />
                 </ProtectedRoute>
                 } />
+                <Route path="/explore" element={
+                  <ProtectedRoute>
+                    <ComingSoon title="Explore" />
+                  </ProtectedRoute>
+                } />
+                <Route path="/notifications" element={
+                  <ProtectedRoute>
+                    <ComingSoon title="Notifications" />
+                  </ProtectedRoute>
+                } />
+                <Route path="/messages" element={
+                  <ProtectedRoute>
+                    <ComingSoon title="Messages" />
+                  </ProtectedRoute>
+                } />
+                <Route path="/bookmarks" element={
+                  <ProtectedRoute>
+                    <ComingSoon title="Bookmarks" />
+                  </ProtectedRoute>
+                } />
+                <Route path="/lists" element={
+                  <ProtectedRoute>
+                    <ComingSoon title="Lists" />
+                  </ProtectedRoute>
+                } />
+                <Route path="*" element={<Home />} />
               </Routes>
             </main>
           </div>

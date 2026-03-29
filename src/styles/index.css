@@ -5,31 +5,32 @@
 @layer base {
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    @apply bg-zinc-950 text-zinc-200;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-glass rounded-3xl;
+    @apply bg-zinc-900/80 backdrop-blur-lg border border-zinc-800 shadow-glass rounded-3xl;
   }
   
   .btn-primary {
-    @apply bg-navy-800 hover:bg-navy-700 text-white font-medium py-3 px-6 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-smooth;
+    @apply bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-3 px-6 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-smooth;
   }
   
   .btn-secondary {
-    @apply bg-brown-800 hover:bg-brown-700 text-white font-medium py-3 px-6 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-smooth;
+    @apply bg-zinc-800 hover:bg-zinc-700 text-white font-medium py-3 px-6 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-smooth;
   }
   
   .input-field {
-    @apply w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all duration-300;
+    @apply w-full px-4 py-3 bg-zinc-900 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 placeholder-zinc-500;
   }
   
   .nav-link {
-    @apply flex items-center space-x-3 px-4 py-3 rounded-2xl text-gray-700 hover:bg-navy-50 hover:text-navy-800 transition-all duration-300;
+    @apply flex items-center space-x-3 px-4 py-3 rounded-2xl text-zinc-400 hover:bg-zinc-900 hover:text-white transition-all duration-300;
   }
   
   .nav-link.active {
-    @apply bg-navy-800 text-white shadow-smooth;
+    @apply bg-zinc-900 text-white shadow-smooth;
   }
 }

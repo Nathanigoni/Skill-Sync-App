@@ -91,8 +91,8 @@ const Projects = () => {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#BBBAC6] border-t-[#1C0F13] mx-auto mb-4"></div>
-          <p className="text-[#6E7E85]">Loading projects...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-indigo-300 border-t-zinc-900 mx-auto mb-4"></div>
+          <p className="text-zinc-400">Loading projects...</p>
         </div>
       </div>
     )
@@ -104,17 +104,17 @@ const Projects = () => {
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
         <div>
           <div className="flex items-center space-x-3 mb-2">
-            <div className="p-2 bg-gradient-to-r from-[#1C0F13] to-[#6E7E85] rounded-lg">
+            <div className="p-2 bg-gradient-to-r from-zinc-900 to-zinc-400 rounded-lg">
               <Folder className="text-white" size={24} />
             </div>
-            <h1 className="text-3xl font-bold text-[#1C0F13]">Projects</h1>
+            <h1 className="text-3xl font-bold text-zinc-100">Projects</h1>
           </div>
-          <p className="text-[#6E7E85] text-lg">Showcase your work and technical expertise</p>
+          <p className="text-zinc-400 text-lg">Showcase your work and technical expertise</p>
         </div>
         
         <Button 
           onClick={() => setShowForm(true)} 
-          className="bg-gradient-to-r from-[#B7CECE] to-[#BBBAC6] text-[#1C0F13] font-semibold hover:shadow-md transition-all duration-300"
+          className="bg-gradient-to-r from-indigo-500 to-indigo-400 text-white font-semibold hover:shadow-md transition-all duration-300"
         >
           <Plus className="mr-2" size={20} />
           Add Project
@@ -124,13 +124,13 @@ const Projects = () => {
       {/* Project Form Modal - Professional design */}
       {showForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-[#E2E2E2]">
+          <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-zinc-800">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-[#1C0F13]">
+              <h2 className="text-xl font-bold text-zinc-100">
                 {editingProject ? 'Edit Project' : 'Create New Project'}
               </h2>
-              <div className="w-10 h-10 bg-gradient-to-r from-[#B7CECE] to-[#BBBAC6] rounded-lg flex items-center justify-center">
-                <Folder className="text-[#1C0F13]" size={20} />
+              <div className="w-10 h-10 bg-gradient-to-r from-indigo-400 to-indigo-300 rounded-lg flex items-center justify-center">
+                <Folder className="text-zinc-100" size={20} />
               </div>
             </div>
             
@@ -144,21 +144,21 @@ const Projects = () => {
               />
 
               <div>
-                <label className="block text-sm font-medium text-[#1C0F13] mb-2">
+                <label className="block text-sm font-medium text-zinc-100 mb-2">
                   Description
                 </label>
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
                   rows={4}
-                  className="w-full px-3 py-2 border border-[#E2E2E2] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B7CECE] focus:border-transparent"
+                  className="w-full px-3 py-2 border border-zinc-800 rounded-lg bg-zinc-950 text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
                   placeholder="Describe your project and its key features"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#1C0F13] mb-2">
+                <label className="block text-sm font-medium text-zinc-100 mb-2">
                   Tech Stack
                 </label>
                 <div className="flex gap-2 mb-3">
@@ -167,10 +167,10 @@ const Projects = () => {
                     value={techInput}
                     onChange={(e) => setTechInput(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTech())}
-                    className="flex-1 px-3 py-2 border border-[#E2E2E2] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B7CECE] focus:border-transparent"
+                    className="flex-1 px-3 py-2 border border-zinc-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
                     placeholder="Add technology (e.g., React, Node.js)"
                   />
-                  <Button type="button" onClick={addTech} className="bg-[#B7CECE] hover:bg-[#BBBAC6] text-[#1C0F13] font-medium">
+                  <Button type="button" onClick={addTech} className="bg-indigo-500 hover:bg-indigo-400 text-white font-medium">
                     Add
                   </Button>
                 </div>
@@ -178,13 +178,13 @@ const Projects = () => {
                   {formData.techStack.map(tech => (
                     <span
                       key={tech}
-                      className="bg-[#E2E2E2] text-[#1C0F13] px-3 py-1 rounded-lg text-sm flex items-center gap-2 font-medium"
+                      className="bg-zinc-800 text-zinc-200 px-3 py-1 rounded-lg text-sm flex items-center gap-2 font-medium"
                     >
                       {tech}
                       <button
                         type="button"
                         onClick={() => removeTech(tech)}
-                        className="hover:text-[#6E7E85] text-xs"
+                        className="hover:text-zinc-400 text-xs"
                       >
                         ×
                       </button>
@@ -211,22 +211,22 @@ const Projects = () => {
                 />
               </div>
 
-              <div className="flex items-center gap-3 p-3 border border-[#E2E2E2] rounded-lg">
+              <div className="flex items-center gap-3 p-3 border border-zinc-800 rounded-lg">
                 <input
                   type="checkbox"
                   id="featured"
                   checked={formData.featured}
                   onChange={(e) => setFormData({...formData, featured: e.target.checked})}
-                  className="rounded border-[#6E7E85] text-[#B7CECE] focus:ring-[#B7CECE]"
+                  className="rounded border-zinc-400 text-indigo-400 focus:ring-indigo-400"
                 />
-                <label htmlFor="featured" className="flex items-center gap-2 text-sm font-medium text-[#1C0F13]">
-                  <Star size={16} className="text-[#B7CECE]" />
+                <label htmlFor="featured" className="flex items-center gap-2 text-sm font-medium text-zinc-100">
+                  <Star size={16} className="text-indigo-400" />
                   Feature this project on your profile
                 </label>
               </div>
 
-              <div className="flex gap-3 pt-4 border-t border-[#E2E2E2]">
-                <Button type="submit" className="flex-1 bg-gradient-to-r from-[#B7CECE] to-[#BBBAC6] text-[#1C0F13] font-semibold hover:shadow-md transition-all">
+              <div className="flex gap-3 pt-4 border-t border-zinc-800">
+                <Button type="submit" className="flex-1 bg-gradient-to-r from-indigo-500 to-indigo-400 text-white font-semibold hover:shadow-md transition-all">
                   {editingProject ? 'Update Project' : 'Create Project'}
                 </Button>
                 <Button
@@ -244,7 +244,7 @@ const Projects = () => {
                       featured: false
                     })
                   }}
-                  className="border-[#E2E2E2] text-[#6E7E85] hover:bg-[#E2E2E2] font-medium"
+                  className="border-zinc-800 text-zinc-400 hover:bg-zinc-800 font-medium"
                 >
                   Cancel
                 </Button>
@@ -257,24 +257,27 @@ const Projects = () => {
       {/* Projects Grid - GitHub repository style */}
       {projects.length > 0 ? (
         <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-          {projects.map(project => (
-            <Card key={project.id} className="p-6 border border-[#E2E2E2] hover:border-[#B7CECE] transition-all duration-300 hover:shadow-md">
+          {projects.map((project) => {
+            const techStack = Array.isArray(project.techStack) ? project.techStack : []
+
+            return (
+              <Card key={project.id} className="p-6 border border-zinc-800 hover:border-indigo-400 transition-all duration-300 hover:shadow-md">
               {/* Project Header */}
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center space-x-3 flex-1 min-w-0">
-                  <div className="w-12 h-12 bg-gradient-to-r from-[#B7CECE] to-[#BBBAC6] rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Folder className="text-[#1C0F13]" size={20} />
+                  <div className="w-12 h-12 bg-gradient-to-r from-indigo-400 to-indigo-300 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Folder className="text-zinc-100" size={20} />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-semibold text-[#1C0F13] truncate text-lg">{project.title}</h3>
+                    <h3 className="font-semibold text-zinc-100 truncate text-lg">{project.title}</h3>
                     <div className="flex items-center space-x-2 mt-1">
                       {project.featured && (
-                        <span className="inline-flex items-center space-x-1 bg-gradient-to-r from-[#B7CECE] to-[#BBBAC6] text-[#1C0F13] px-2 py-1 rounded-full text-xs font-medium">
+                        <span className="inline-flex items-center space-x-1 bg-gradient-to-r from-indigo-500 to-indigo-400 text-white px-2 py-1 rounded-full text-xs font-medium">
                           <Star size={12} />
                           <span>Featured</span>
                         </span>
                       )}
-                      <span className="text-xs text-[#6E7E85]">
+                      <span className="text-xs text-zinc-400">
                         Updated {new Date().toLocaleDateString()}
                       </span>
                     </div>
@@ -283,27 +286,27 @@ const Projects = () => {
               </div>
               
               {/* Project Description */}
-              <p className="text-[#6E7E85] text-sm mb-4 line-clamp-2 leading-relaxed">{project.description}</p>
+              <p className="text-zinc-400 text-sm mb-4 line-clamp-2 leading-relaxed">{project.description}</p>
               
               {/* Tech Stack - GitHub language bar style */}
               <div className="flex flex-wrap gap-1.5 mb-4">
-                {project.techStack.slice(0, 4).map(tech => (
+                {techStack.slice(0, 4).map(tech => (
                   <span
                     key={tech}
-                    className="bg-[#E2E2E2] text-[#1C0F13] px-2.5 py-1 rounded text-xs font-medium border border-[#E2E2E2]"
+                    className="bg-zinc-800 text-zinc-200 px-2.5 py-1 rounded text-xs font-medium border border-zinc-800"
                   >
                     {tech}
                   </span>
                 ))}
-                {project.techStack.length > 4 && (
-                  <span className="text-[#6E7E85] text-xs font-medium px-2 py-1">
-                    +{project.techStack.length - 4} more
+                {techStack.length > 4 && (
+                  <span className="text-zinc-400 text-xs font-medium px-2 py-1">
+                    +{techStack.length - 4} more
                   </span>
                 )}
               </div>
 
               {/* Analytics - LinkedIn style metrics */}
-              <div className="flex items-center justify-between text-sm text-[#6E7E85] mb-4 py-2 border-t border-b border-[#E2E2E2]">
+              <div className="flex items-center justify-between text-sm text-zinc-400 mb-4 py-2 border-t border-b border-zinc-800">
                 <div className="flex items-center space-x-1">
                   <Eye size={14} />
                   <span>{project.viewCount || 0} views</span>
@@ -322,7 +325,7 @@ const Projects = () => {
                       href={project.repoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center space-x-1 px-3 py-2 text-[#6E7E85] hover:text-[#1C0F13] hover:bg-[#E2E2E2] rounded-lg transition-all duration-200 text-sm font-medium"
+                      className="flex items-center space-x-1 px-3 py-2 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 rounded-lg transition-all duration-200 text-sm font-medium"
                     >
                       <Github size={16} />
                       <span>Code</span>
@@ -333,7 +336,7 @@ const Projects = () => {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center space-x-1 px-3 py-2 text-[#6E7E85] hover:text-[#1C0F13] hover:bg-[#E2E2E2] rounded-lg transition-all duration-200 text-sm font-medium"
+                      className="flex items-center space-x-1 px-3 py-2 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 rounded-lg transition-all duration-200 text-sm font-medium"
                     >
                       <ExternalLink size={16} />
                       <span>Live Demo</span>
@@ -348,21 +351,21 @@ const Projects = () => {
                       setFormData({
                         title: project.title,
                         description: project.description,
-                        techStack: project.techStack,
+                        techStack,
                         repoUrl: project.repoUrl,
                         liveUrl: project.liveUrl,
                         featured: project.featured
                       })
                       setShowForm(true)
                     }}
-                    className="p-2 text-[#6E7E85] hover:text-[#1C0F13] hover:bg-[#E2E2E2] rounded-lg transition-all duration-200"
+                    className="p-2 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 rounded-lg transition-all duration-200"
                     title="Edit project"
                   >
                     <Edit size={16} />
                   </button>
                   <button
                     onClick={() => handleDelete(project.id)}
-                    className="p-2 text-[#6E7E85] hover:text-[#1C0F13] hover:bg-[#E2E2E2] rounded-lg transition-all duration-200"
+                    className="p-2 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 rounded-lg transition-all duration-200"
                     title="Delete project"
                   >
                     <Trash2 size={16} />
@@ -370,20 +373,21 @@ const Projects = () => {
                 </div>
               </div>
             </Card>
-          ))}
+            )
+          })}
         </div>
       ) : (
-        <Card className="text-center py-16 border border-[#E2E2E2]">
-          <div className="w-20 h-20 bg-gradient-to-r from-[#B7CECE] to-[#BBBAC6] rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <Folder className="text-[#1C0F13]" size={32} />
+        <Card className="text-center py-16 border border-zinc-800">
+          <div className="w-20 h-20 bg-gradient-to-r from-indigo-400 to-indigo-300 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <Folder className="text-zinc-100" size={32} />
           </div>
-          <h3 className="text-xl font-bold text-[#1C0F13] mb-3">No projects yet</h3>
-          <p className="text-[#6E7E85] max-w-md mx-auto mb-6 leading-relaxed">
+          <h3 className="text-xl font-bold text-zinc-100 mb-3">No projects yet</h3>
+          <p className="text-zinc-400 max-w-md mx-auto mb-6 leading-relaxed">
             Showcase your best work to potential employers and collaborators. Add your first project to get started.
           </p>
           <Button 
             onClick={() => setShowForm(true)} 
-            className="bg-gradient-to-r from-[#B7CECE] to-[#BBBAC6] text-[#1C0F13] font-semibold hover:shadow-md transition-all duration-300"
+            className="bg-gradient-to-r from-indigo-500 to-indigo-400 text-white font-semibold hover:shadow-md transition-all duration-300"
           >
             <Plus className="mr-2" size={20} />
             Create Your First Project

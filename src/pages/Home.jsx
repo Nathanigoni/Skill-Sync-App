@@ -144,12 +144,12 @@ const Home = () => {
   const renderPostContent = (post) => {
     switch (post.postType) {
       case 'TEXT':
-        return <p className="text-[#E2E2E2] mb-3 whitespace-pre-wrap">{post.content}</p>
+        return <p className="text-zinc-200 mb-3 whitespace-pre-wrap">{post.content}</p>
       
       case 'IMAGE':
         return (
           <>
-            {post.content && <p className="text-[#E2E2E2] mb-3 whitespace-pre-wrap">{post.content}</p>}
+            {post.content && <p className="text-zinc-200 mb-3 whitespace-pre-wrap">{post.content}</p>}
             {post.images && post.images.length > 0 && (
               <div className="grid grid-cols-2 gap-2 mb-3">
                 {post.images.map((image, index) => (
@@ -168,9 +168,9 @@ const Home = () => {
       case 'ARTICLE':
         return (
           <div className="mb-3">
-            <h3 className="text-xl font-semibold text-[#B7CECE] mb-2">{post.articleTitle}</h3>
-            <p className="text-[#E2E2E2] whitespace-pre-wrap line-clamp-3">{post.articleContent}</p>
-            <button className="text-[#B7CECE] hover:text-[#BBBAC6] text-sm mt-2">
+            <h3 className="text-xl font-semibold text-indigo-400 mb-2">{post.articleTitle}</h3>
+            <p className="text-zinc-200 whitespace-pre-wrap line-clamp-3">{post.articleContent}</p>
+            <button className="text-indigo-400 hover:text-indigo-300 text-sm mt-2">
               Read full article →
             </button>
           </div>
@@ -179,12 +179,12 @@ const Home = () => {
       case 'CODE':
         return (
           <>
-            {post.content && <p className="text-[#E2E2E2] mb-3 whitespace-pre-wrap">{post.content}</p>}
+            {post.content && <p className="text-zinc-200 mb-3 whitespace-pre-wrap">{post.content}</p>}
             {post.codeSnippet && (
-              <pre className="bg-[#151517] p-4 rounded-2xl text-sm overflow-x-auto mb-3 text-[#E2E2E2]">
+              <pre className="bg-zinc-950 p-4 rounded-2xl text-sm overflow-x-auto mb-3 text-zinc-200">
                 <code>{post.codeSnippet}</code>
                 {post.language && (
-                  <div className="text-right text-xs text-[#6E7E85] mt-2">
+                  <div className="text-right text-xs text-zinc-400 mt-2">
                     {post.language}
                   </div>
                 )}
@@ -194,7 +194,7 @@ const Home = () => {
         )
       
       default:
-        return <p className="text-[#E2E2E2] mb-3 whitespace-pre-wrap">{post.content}</p>
+        return <p className="text-zinc-200 mb-3 whitespace-pre-wrap">{post.content}</p>
     }
   }
 
@@ -224,42 +224,7 @@ const Home = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-[#151517] text-white">
-      {/* Navigation */}
-      <nav className="container mx-auto px-6 py-4">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-[#1C0F13] to-[#6E7E85] rounded-2xl flex items-center justify-center">
-              <span className="text-white font-bold text-lg">SS</span>
-            </div>
-            <span className="text-xl font-bold text-white">SkillSync</span>
-          </div>
-          
-          <div className="flex items-center space-x-4">
-            {user ? (
-              <div className="flex items-center space-x-4">
-                <Link to="/dashboard" className="text-[#E2E2E2] hover:text-white transition-colors">
-                  Dashboard
-                </Link>
-                <Link to="/profile" className="text-[#E2E2E2] hover:text-white transition-colors">
-                  Profile
-                </Link>
-              </div>
-            ) : (
-              <>
-                <Link to="/login" className="text-[#E2E2E2] hover:text-white transition-colors">
-                  Login
-                </Link>
-                <Link to="/register">
-                  <Button className="bg-[#B7CECE] hover:bg-[#BBBAC6] text-[#1C0F13]">
-                    Get Started Free
-                  </Button>
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-zinc-950 text-white">
 
       {/* Main Content Grid */}
       <div className="container mx-auto px-6 py-8">
@@ -268,23 +233,23 @@ const Home = () => {
           {/* Left Column - Hero & Features */}
           <div className="lg:col-span-1 space-y-8">
             {/* Hero Section */}
-            <div className="bg-[#1C0F13] rounded-2xl p-6 border border-[#2F3336]">
+            <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800">
               <h1 className="text-3xl font-bold mb-4 leading-tight">
                 Showcase Your
-                <span className="text-[#B7CECE] block">Developer Journey</span>
+                <span className="text-indigo-400 block">Developer Journey</span>
               </h1>
-              <p className="text-[#BBBAC6] mb-6 leading-relaxed">
+              <p className="text-indigo-300 mb-6 leading-relaxed">
                 A smart portfolio platform that automatically detects your skills from GitHub and connects you with the developer community.
               </p>
               {!user && (
                 <div className="space-y-3">
                   <Link to="/register" className="block w-full">
-                    <Button className="w-full bg-[#B7CECE] hover:bg-[#BBBAC6] text-[#1C0F13] font-semibold">
+                    <Button className="w-full bg-indigo-500 hover:bg-indigo-400 text-white font-semibold">
                       Start Building Your Portfolio
                     </Button>
                   </Link>
                   {/* <Link to="/login" className="block w-full">
-                    <Button variant="outline" className="w-full border-[#6E7E85] text-[#E2E2E2] hover:bg-[#6E7E85]">
+                    <Button variant="outline" className="w-full border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-white">
                       See Demo
                     </Button>
                   </Link> */}
@@ -293,29 +258,29 @@ const Home = () => {
             </div>
 
             {/* Stats Section */}
-            <div className="bg-[#1C0F13] rounded-2xl p-6 border border-[#2F3336]">
+            <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800">
               <div className="grid grid-cols-2 gap-4">
                 {stats.map((stat, index) => (
                   <div key={index} className="text-center">
-                    <div className="text-2xl font-bold text-[#B7CECE] mb-1">{stat.number}</div>
-                    <div className="text-[#BBBAC6] text-sm">{stat.label}</div>
+                    <div className="text-2xl font-bold text-indigo-400 mb-1">{stat.number}</div>
+                    <div className="text-indigo-300 text-sm">{stat.label}</div>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Features */}
-            <div className="bg-[#1C0F13] rounded-2xl p-6 border border-[#2F3336]">
+            <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800">
               <h3 className="text-lg font-bold mb-4">Why SkillSync?</h3>
               <div className="space-y-4">
                 {features.map((feature, index) => (
                   <div key={index} className="flex items-start space-x-3">
-                    <div className="w-10 h-10 bg-gradient-to-r from-[#B7CECE] to-[#BBBAC6] rounded-lg flex items-center justify-center flex-shrink-0">
-                      <feature.icon className="text-[#1C0F13]" size={20} />
+                    <div className="w-10 h-10 bg-gradient-to-r from-indigo-400 to-indigo-300 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <feature.icon className="text-zinc-100" size={20} />
                     </div>
                     <div>
                       <h4 className="font-semibold text-white text-sm">{feature.title}</h4>
-                      <p className="text-[#BBBAC6] text-xs mt-1">{feature.description}</p>
+                      <p className="text-indigo-300 text-xs mt-1">{feature.description}</p>
                     </div>
                   </div>
                 ))}
@@ -327,16 +292,16 @@ const Home = () => {
           <div className="lg:col-span-2">
             {/* Create Post Card - Only show if user is logged in */}
             {user && (
-              <Card className="p-6 bg-[#1C0F13] border-[#2F3336] mb-6">
+              <Card className="p-6 bg-zinc-900 border-zinc-800 mb-6">
                 <div className="flex space-x-4 mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-[#1C0F13] to-[#6E7E85] rounded-2xl flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-zinc-900 to-zinc-400 rounded-2xl flex items-center justify-center">
                     <span className="text-white font-bold text-sm">
                       {user?.profile?.name?.charAt(0) || 'U'}
                     </span>
                   </div>
                   <div className="flex-1">
                     {/* Post Type Tabs */}
-                    <div className="flex space-x-2 mb-4 border-b border-[#2F3336]">
+                    <div className="flex space-x-2 mb-4 border-b border-zinc-800">
                       {[
                         { key: 'text', icon: Type, label: 'Text' },
                         { key: 'image', icon: Image, label: 'Image' },
@@ -348,8 +313,8 @@ const Home = () => {
                           onClick={() => setActiveTab(key)}
                           className={`flex items-center space-x-1 px-3 py-2 border-b-2 transition-colors ${
                             activeTab === key 
-                              ? 'border-[#B7CECE] text-[#B7CECE]' 
-                              : 'border-transparent text-[#6E7E85] hover:text-[#BBBAC6]'
+                              ? 'border-indigo-400 text-indigo-400' 
+                              : 'border-transparent text-zinc-400 hover:text-indigo-300'
                           }`}
                         >
                           <Icon size={16} />
@@ -365,20 +330,20 @@ const Home = () => {
                           value={textContent}
                           onChange={(e) => setTextContent(e.target.value)}
                           placeholder="What's on your mind?"
-                          className="w-full p-3 bg-[#151517] border border-[#2F3336] text-white rounded-2xl focus:ring-2 focus:ring-[#B7CECE] focus:border-transparent resize-none placeholder-[#6E7E85]"
+                          className="w-full p-3 bg-zinc-950 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent resize-none placeholder-zinc-400"
                           rows="3"
                         />
                         <Input
                           value={textTags}
                           onChange={(e) => setTextTags(e.target.value)}
                           placeholder="Add tags (comma separated)"
-                          className="bg-[#151517] border-[#2F3336] text-white placeholder-[#6E7E85]"
+                          className="bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
                         />
                         <div className="flex justify-end">
                           <Button 
                             onClick={handleCreateTextPost} 
                             disabled={loading}
-                            className="bg-[#B7CECE] hover:bg-[#BBBAC6] text-[#1C0F13]"
+                            className="bg-indigo-500 hover:bg-indigo-400 text-white"
                           >
                             <Send size={16} className="mr-2" />
                             {loading ? 'Posting...' : 'Post'}
@@ -394,7 +359,7 @@ const Home = () => {
                           value={imageContent}
                           onChange={(e) => setImageContent(e.target.value)}
                           placeholder="Describe your images..."
-                          className="w-full p-3 bg-[#151517] border border-[#2F3336] text-white rounded-2xl focus:ring-2 focus:ring-[#B7CECE] focus:border-transparent resize-none placeholder-[#6E7E85]"
+                          className="w-full p-3 bg-zinc-950 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent resize-none placeholder-zinc-400"
                           rows="2"
                         />
                         <input
@@ -402,19 +367,19 @@ const Home = () => {
                           multiple
                           accept="image/*"
                           onChange={handleFileSelect}
-                          className="w-full p-2 bg-[#151517] border border-[#2F3336] text-white rounded-2xl file:bg-[#B7CECE] file:text-[#1C0F13] file:border-0 file:rounded-lg file:px-4 file:py-2 file:mr-4"
+                          className="w-full p-2 bg-zinc-950 border border-zinc-800 text-white rounded-2xl file:bg-indigo-400 file:text-zinc-100 file:border-0 file:rounded-lg file:px-4 file:py-2 file:mr-4"
                         />
                         <Input
                           value={imageTags}
                           onChange={(e) => setImageTags(e.target.value)}
                           placeholder="Add tags (comma separated)"
-                          className="bg-[#151517] border-[#2F3336] text-white placeholder-[#6E7E85]"
+                          className="bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
                         />
                         <div className="flex justify-end">
                           <Button 
                             onClick={handleCreateImagePost} 
                             disabled={loading}
-                            className="bg-[#B7CECE] hover:bg-[#BBBAC6] text-[#1C0F13]"
+                            className="bg-indigo-500 hover:bg-indigo-400 text-white"
                           >
                             <Send size={16} className="mr-2" />
                             {loading ? 'Posting...' : 'Post'}
@@ -430,26 +395,26 @@ const Home = () => {
                           value={articleTitle}
                           onChange={(e) => setArticleTitle(e.target.value)}
                           placeholder="Article title"
-                          className="bg-[#151517] border-[#2F3336] text-white placeholder-[#6E7E85]"
+                          className="bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
                         />
                         <textarea
                           value={articleContent}
                           onChange={(e) => setArticleContent(e.target.value)}
                           placeholder="Write your article..."
-                          className="w-full p-3 bg-[#151517] border border-[#2F3336] text-white rounded-2xl focus:ring-2 focus:ring-[#B7CECE] focus:border-transparent resize-none placeholder-[#6E7E85]"
+                          className="w-full p-3 bg-zinc-950 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent resize-none placeholder-zinc-400"
                           rows="4"
                         />
                         <Input
                           value={articleTags}
                           onChange={(e) => setArticleTags(e.target.value)}
                           placeholder="Add tags (comma separated)"
-                          className="bg-[#151517] border-[#2F3336] text-white placeholder-[#6E7E85]"
+                          className="bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
                         />
                         <div className="flex justify-end">
                           <Button 
                             onClick={handleCreateArticlePost} 
                             disabled={loading}
-                            className="bg-[#B7CECE] hover:bg-[#BBBAC6] text-[#1C0F13]"
+                            className="bg-indigo-500 hover:bg-indigo-400 text-white"
                           >
                             <Send size={16} className="mr-2" />
                             {loading ? 'Publishing...' : 'Publish'}
@@ -465,14 +430,14 @@ const Home = () => {
                           value={codeContent}
                           onChange={(e) => setCodeContent(e.target.value)}
                           placeholder="Describe your code..."
-                          className="w-full p-3 bg-[#151517] border border-[#2F3336] text-white rounded-2xl focus:ring-2 focus:ring-[#B7CECE] focus:border-transparent resize-none placeholder-[#6E7E85]"
+                          className="w-full p-3 bg-zinc-950 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent resize-none placeholder-zinc-400"
                           rows="2"
                         />
                         <textarea
                           value={codeSnippet}
                           onChange={(e) => setCodeSnippet(e.target.value)}
                           placeholder="Paste your code here..."
-                          className="w-full p-3 bg-[#151517] border border-[#2F3336] text-white rounded-2xl focus:ring-2 focus:ring-[#B7CECE] focus:border-transparent font-mono text-sm resize-none placeholder-[#6E7E85]"
+                          className="w-full p-3 bg-zinc-950 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent font-mono text-sm resize-none placeholder-zinc-400"
                           rows="4"
                         />
                         <div className="flex gap-2">
@@ -480,20 +445,20 @@ const Home = () => {
                             value={codeLanguage}
                             onChange={(e) => setCodeLanguage(e.target.value)}
                             placeholder="Programming language"
-                            className="flex-1 bg-[#151517] border-[#2F3336] text-white placeholder-[#6E7E85]"
+                            className="flex-1 bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
                           />
                           <Input
                             value={codeTags}
                             onChange={(e) => setCodeTags(e.target.value)}
                             placeholder="Tags (comma separated)"
-                            className="flex-1 bg-[#151517] border-[#2F3336] text-white placeholder-[#6E7E85]"
+                            className="flex-1 bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
                           />
                         </div>
                         <div className="flex justify-end">
                           <Button 
                             onClick={handleCreateCodePost} 
                             disabled={loading}
-                            className="bg-[#B7CECE] hover:bg-[#BBBAC6] text-[#1C0F13]"
+                            className="bg-indigo-500 hover:bg-indigo-400 text-white"
                           >
                             <Send size={16} className="mr-2" />
                             {loading ? 'Posting...' : 'Post'}
@@ -507,26 +472,26 @@ const Home = () => {
             )}
 
             {/* Feed */}
-            <div className="bg-[#1C0F13] rounded-2xl border border-[#2F3336] overflow-hidden">
+            <div className="bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden">
               {/* Feed Header */}
-              <div className="p-4 border-b border-[#2F3336]">
+              <div className="p-4 border-b border-zinc-800">
                 <h2 className="text-xl font-bold">Developer Community Feed</h2>
-                <p className="text-[#BBBAC6] text-sm mt-1">
+                <p className="text-indigo-300 text-sm mt-1">
                   {user ? 'See what developers are building and sharing' : 'Sign in to join the conversation'}
                 </p>
               </div>
 
               {/* Posts Feed */}
-              <div className="divide-y divide-[#2F3336]">
+              <div className="divide-y divide-zinc-800">
                 {posts.length === 0 ? (
-                  <div className="p-8 text-center text-[#BBBAC6]">
+                  <div className="p-8 text-center text-indigo-300">
                     {user ? 'No posts yet. Be the first to share something!' : 'Sign in to see posts from the community'}
                   </div>
                 ) : (
                   posts.map(post => (
-                    <div key={post.id} className="p-4 hover:bg-[#151517] transition-colors duration-200">
+                    <div key={post.id} className="p-4 hover:bg-zinc-950 transition-colors duration-200">
                       <div className="flex space-x-4">
-                        <div className="w-12 h-12 bg-gradient-to-r from-[#1C0F13] to-[#6E7E85] rounded-2xl flex items-center justify-center">
+                        <div className="w-12 h-12 bg-gradient-to-r from-zinc-900 to-zinc-400 rounded-2xl flex items-center justify-center">
                           <span className="text-white font-bold text-sm">
                             {post.userName?.charAt(0) || 'U'}
                           </span>
@@ -535,12 +500,12 @@ const Home = () => {
                         <div className="flex-1">
                           <div className="flex items-center space-x-2 mb-2">
                             <h3 className="font-semibold text-white">{post.userName}</h3>
-                            <span className="text-[#6E7E85] text-sm">@{post.userGithubUsername}</span>
-                            <span className="text-[#2F3336] text-sm">•</span>
-                            <span className="text-[#6E7E85] text-sm">
+                            <span className="text-zinc-400 text-sm">@{post.userGithubUsername}</span>
+                            <span className="text-zinc-800 text-sm">•</span>
+                            <span className="text-zinc-400 text-sm">
                               {new Date(post.createdAt).toLocaleDateString()}
                             </span>
-                            <span className="px-2 py-1 bg-[#6E7E85] text-white rounded-full text-xs capitalize">
+                            <span className="px-2 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs capitalize">
                               {post.postType?.toLowerCase()}
                             </span>
                           </div>
@@ -550,14 +515,14 @@ const Home = () => {
                           {post.tags && post.tags.length > 0 && (
                             <div className="flex flex-wrap gap-1 mb-3">
                               {post.tags.map(tag => (
-                                <span key={tag} className="bg-[#6E7E85] text-white px-2 py-1 rounded-xl text-xs">
+                                <span key={tag} className="bg-zinc-800 text-zinc-300 px-2 py-1 rounded-xl text-xs">
                                   #{tag}
                                 </span>
                               ))}
                             </div>
                           )}
                           
-                          <div className="flex space-x-6 text-[#6E7E85]">
+                          <div className="flex space-x-6 text-zinc-400">
                             <button 
                               onClick={() => handleLike(post.id)}
                               className="flex items-center space-x-1 hover:text-red-500 transition-colors"
@@ -565,11 +530,11 @@ const Home = () => {
                               <Heart size={18} />
                               <span>{post.likes || 0}</span>
                             </button>
-                            <button className="flex items-center space-x-1 hover:text-[#B7CECE] transition-colors">
+                            <button className="flex items-center space-x-1 hover:text-indigo-400 transition-colors">
                               <MessageCircle size={18} />
                               <span>{post.comments || 0}</span>
                             </button>
-                            <button className="flex items-center space-x-1 hover:text-[#B7CECE] transition-colors">
+                            <button className="flex items-center space-x-1 hover:text-indigo-400 transition-colors">
                               <Share size={18} />
                               <span>{post.shares || 0}</span>
                             </button>
@@ -584,11 +549,11 @@ const Home = () => {
 
             {/* CTA Section for non-logged in users */}
             {!user && (
-              <div className="mt-6 bg-[#1C0F13] rounded-2xl p-6 text-center">
+              <div className="mt-6 bg-zinc-900 rounded-2xl p-6 text-center">
                 <h3 className="text-xl font-bold mb-2">Ready to Join the Community?</h3>
-                <p className="text-[#E2E2E2] mb-4">Create your profile and start sharing your developer journey today.</p>
+                <p className="text-zinc-200 mb-4">Create your profile and start sharing your developer journey today.</p>
                 <Link to="/register">
-                  <Button className="bg-blue-600 text-[#1C0F13] hover:bg-[#E2E2E2] font-semibold">
+                  <Button className="bg-blue-600 text-white hover:bg-blue-500 font-semibold">
                     <Star className="mr-2" size={16} />
                     Join SkillSync Free
                   </Button>

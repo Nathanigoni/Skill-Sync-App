@@ -11,9 +11,9 @@ const Button = ({
   const baseClasses = 'font-medium rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-smooth focus:outline-none focus:ring-2 focus:ring-offset-2'
   
     const variants = {
-    primary: 'bg-navy-800 hover:bg-navy-700 text-white focus:ring-navy-500',
-    secondary: 'bg-brown-800 hover:bg-brown-700 text-white focus:ring-brown-500',
-    outline: 'border-2 border-current text-current hover:bg-current hover:text-white focus:ring-current'
+    primary: 'bg-indigo-500 hover:bg-indigo-600 text-white focus:ring-indigo-500',
+    secondary: 'bg-zinc-800 hover:bg-zinc-700 text-white focus:ring-zinc-500',
+    outline: 'border-2 border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-white focus:ring-zinc-500'
     }
   
   const sizes = {

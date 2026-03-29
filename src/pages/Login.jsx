@@ -43,12 +43,12 @@ const Login = () => {
     <div className="max-w-md mx-auto py-12">
       <Card className="p-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-navy-800">Welcome Back</h1>
-          <p className="text-gray-600 mt-2">Sign in to your account</p>
+          <h1 className="text-3xl font-bold text-indigo-400">Welcome Back</h1>
+          <p className="text-zinc-400 mt-2">Sign in to your account</p>
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-2xl mb-6">
+          <div className="bg-red-900\/50 border border-red-800 text-red-400 px-4 py-3 rounded-2xl mb-6">
             {error}
           </div>
         )}
@@ -86,9 +86,9 @@ const Login = () => {
         </form>
 
         <div className="text-center mt-6">
-          <p className="text-gray-600">
+          <p className="text-zinc-400">
             Don't have an account?{' '}
-            <Link to="/register" className="text-navy-800 hover:text-navy-700 font-medium">
+            <Link to="/register" className="text-indigo-400 hover:text-indigo-300 font-medium">
               Sign up
             </Link>
           </p>

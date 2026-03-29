@@ -20,11 +20,14 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       authService.getCurrentUser()
         .then(userData => {
-          console.log('Loaded user:', userData) // Debug log
-          setUser(userData)
+          const storedGitHubUsername = localStorage.getItem('githubUsername')
+          const nextUser =
+            storedGitHubUsername && !userData?.githubUsername
+              ? { ...userData, githubUsername: storedGitHubUsername }
+              : userData
+          setUser(nextUser)
         })
-        .catch((error) => {
-          console.error('Error loading user:', error)
+        .catch(() => {
           localStorage.removeItem('token')
         })
         .finally(() => setLoading(false))
@@ -34,47 +37,46 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   const login = async (email, password) => {
-    try {
-      console.log('Logging in...', email) // Debug log
-      const response = await authService.login(email, password)
-      console.log('Login response:', response) // Debug log
-      
-      // Fix: Extract user data and token correctly
-      const userData = response; // response is already the data from authService
-      const token = response.token; // Adjust based on your actual response structure
-      
-      setUser(userData)
+    const response = await authService.login(email, password)
+    const userData = response
+    const token = response?.token
+
+    setUser(userData)
+    if (token) {
       localStorage.setItem('token', token)
-      return response
-    } catch (error) {
-      console.error('Login error in AuthContext:', error)
-      throw error
     }
+    return response
   }
 
   const register = async (userData) => {
-    try {
-      console.log('Registering...', userData) // Debug log
-      const response = await authService.register(userData)
-      console.log('Register response:', response) // Debug log
-      
-      // Fix: Extract user data and token correctly
-      const newUser = response; // response is already the data from authService
-      const token = response.token; // Adjust based on your actual response structure
-      
-      setUser(newUser)
+    const response = await authService.register(userData)
+    const newUser = response
+    const token = response?.token
+
+    setUser(newUser)
+    if (token) {
       localStorage.setItem('token', token)
-      return response
-    } catch (error) {
-      console.error('Register error in AuthContext:', error)
-      throw error
     }
+    return response
   }
 
   const logout = () => {
-    console.log('Logging out...') // Debug log
     setUser(null)
     localStorage.removeItem('token')
+    localStorage.removeItem('githubUsername')
+  }
+
+  const updateUser = (partial) => {
+    setUser((prev) => {
+      if (!prev || !partial) return prev
+      const nextProfile = partial.profile ? { ...prev.profile, ...partial.profile } : prev.profile
+      const nextUser = { ...prev, ...partial, profile: nextProfile }
+      const nextGitHubUsername = nextUser?.githubUsername
+      if (typeof nextGitHubUsername === 'string' && nextGitHubUsername.trim()) {
+        localStorage.setItem('githubUsername', nextGitHubUsername.trim())
+      }
+      return nextUser
+    })
   }
 
   const value = {
@@ -82,6 +84,7 @@ export const AuthProvider = ({ children }) => {
     login,
     register,
     logout,
+    updateUser,
     loading
   }
 

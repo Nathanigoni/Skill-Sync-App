@@ -143,18 +143,18 @@ const Feed = () => {
   const renderPostContent = (post) => {
     switch (post.postType) {
       case 'TEXT':
-        return <p className="text-[#E2E2E2] mb-3 whitespace-pre-wrap">{post.content}</p>
+        return <p className="text-zinc-200 mb-3 whitespace-pre-wrap">{post.content}</p>
       
       case 'IMAGE':
         return (
           <>
-            {post.content && <p className="text-[#E2E2E2] mb-3 whitespace-pre-wrap">{post.content}</p>}
+            {post.content && <p className="text-zinc-200 mb-3 whitespace-pre-wrap">{post.content}</p>}
             {post.images && post.images.length > 0 && (
               <div className="grid grid-cols-2 gap-2 mb-3">
                 {post.images.map((image, index) => (
                   <img 
                     key={index}
-                    src={`http://localhost:8080${image}`}
+                    src={image.startsWith('http') ? image : `${import.meta.env.VITE_API_BASE_URL || ''}${image}`}
                     alt={`Post image ${index + 1}`}
                     className="rounded-2xl w-full h-48 object-cover"
                   />
@@ -167,9 +167,9 @@ const Feed = () => {
       case 'ARTICLE':
         return (
           <div className="mb-3">
-            <h3 className="text-xl font-semibold text-[#B7CECE] mb-2">{post.articleTitle}</h3>
-            <p className="text-[#E2E2E2] whitespace-pre-wrap line-clamp-3">{post.articleContent}</p>
-            <button className="text-[#B7CECE] hover:text-[#BBBAC6] text-sm mt-2">
+            <h3 className="text-xl font-semibold text-indigo-400 mb-2">{post.articleTitle}</h3>
+            <p className="text-zinc-200 whitespace-pre-wrap line-clamp-3">{post.articleContent}</p>
+            <button className="text-indigo-400 hover:text-indigo-300 text-sm mt-2">
               Read full article →
             </button>
           </div>
@@ -178,12 +178,12 @@ const Feed = () => {
       case 'CODE':
         return (
           <>
-            {post.content && <p className="text-[#E2E2E2] mb-3 whitespace-pre-wrap">{post.content}</p>}
+            {post.content && <p className="text-zinc-200 mb-3 whitespace-pre-wrap">{post.content}</p>}
             {post.codeSnippet && (
-              <pre className="bg-[#151517] p-4 rounded-2xl text-sm overflow-x-auto mb-3 text-[#E2E2E2]">
+              <pre className="bg-zinc-950 p-4 rounded-2xl text-sm overflow-x-auto mb-3 text-zinc-200">
                 <code>{post.codeSnippet}</code>
                 {post.language && (
-                  <div className="text-right text-xs text-[#6E7E85] mt-2">
+                  <div className="text-right text-xs text-zinc-400 mt-2">
                     {post.language}
                   </div>
                 )}
@@ -193,24 +193,24 @@ const Feed = () => {
         )
       
       default:
-        return <p className="text-[#E2E2E2] mb-3 whitespace-pre-wrap">{post.content}</p>
+        return <p className="text-zinc-200 mb-3 whitespace-pre-wrap">{post.content}</p>
     }
   }
 
   return (
-    <div className="min-h-screen bg-[#151517] text-white">
+    <div className="min-h-screen bg-zinc-950 text-white">
       <div className="max-w-2xl mx-auto space-y-6 py-8">
         {/* Create Post Card */}
-        <Card className="p-6 bg-[#1C0F13] border-[#2F3336]">
+        <Card className="p-6 bg-zinc-900 border-zinc-800">
           <div className="flex space-x-4 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-[#1C0F13] to-[#6E7E85] rounded-2xl flex items-center justify-center">
+            <div className="w-12 h-12 bg-gradient-to-r from-zinc-900 to-zinc-400 rounded-2xl flex items-center justify-center">
               <span className="text-white font-bold text-sm">
                 {user?.profile?.name?.charAt(0) || 'U'}
               </span>
             </div>
             <div className="flex-1">
               {/* Post Type Tabs */}
-              <div className="flex space-x-2 mb-4 border-b border-[#2F3336]">
+              <div className="flex space-x-2 mb-4 border-b border-zinc-800">
                 {[
                   { key: 'text', icon: Type, label: 'Text' },
                   { key: 'image', icon: Image, label: 'Image' },
@@ -222,8 +222,8 @@ const Feed = () => {
                     onClick={() => setActiveTab(key)}
                     className={`flex items-center space-x-1 px-3 py-2 border-b-2 transition-colors ${
                       activeTab === key 
-                        ? 'border-[#B7CECE] text-[#B7CECE]' 
-                        : 'border-transparent text-[#6E7E85] hover:text-[#BBBAC6]'
+                        ? 'border-indigo-400 text-indigo-400' 
+                        : 'border-transparent text-zinc-400 hover:text-indigo-300'
                     }`}
                   >
                     <Icon size={16} />
@@ -239,20 +239,20 @@ const Feed = () => {
                     value={textContent}
                     onChange={(e) => setTextContent(e.target.value)}
                     placeholder="What's on your mind?"
-                    className="w-full p-3 bg-[#151517] border border-[#2F3336] text-white rounded-2xl focus:ring-2 focus:ring-[#B7CECE] focus:border-transparent resize-none placeholder-[#6E7E85]"
+                    className="w-full p-3 bg-zinc-950 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent resize-none placeholder-zinc-400"
                     rows="3"
                   />
                   <Input
                     value={textTags}
                     onChange={(e) => setTextTags(e.target.value)}
                     placeholder="Add tags (comma separated)"
-                    className="bg-[#151517] border-[#2F3336] text-white placeholder-[#6E7E85]"
+                    className="bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
                   />
                   <div className="flex justify-end">
                     <Button 
                       onClick={handleCreateTextPost} 
                       disabled={loading}
-                      className="bg-[#B7CECE] hover:bg-[#BBBAC6] text-[#1C0F13]"
+                      className="bg-indigo-500 hover:bg-indigo-400 text-white"
                     >
                       <Send size={16} className="mr-2" />
                       {loading ? 'Posting...' : 'Post'}
@@ -268,7 +268,7 @@ const Feed = () => {
                     value={imageContent}
                     onChange={(e) => setImageContent(e.target.value)}
                     placeholder="Describe your images..."
-                    className="w-full p-3 bg-[#151517] border border-[#2F3336] text-white rounded-2xl focus:ring-2 focus:ring-[#B7CECE] focus:border-transparent resize-none placeholder-[#6E7E85]"
+                    className="w-full p-3 bg-zinc-950 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent resize-none placeholder-zinc-400"
                     rows="2"
                   />
                   <input
@@ -276,19 +276,19 @@ const Feed = () => {
                     multiple
                     accept="image/*"
                     onChange={handleFileSelect}
-                    className="w-full p-2 bg-[#151517] border border-[#2F3336] text-white rounded-2xl file:bg-[#B7CECE] file:text-[#1C0F13] file:border-0 file:rounded-lg file:px-4 file:py-2 file:mr-4"
+                    className="w-full p-2 bg-zinc-950 border border-zinc-800 text-white rounded-2xl file:bg-indigo-400 file:text-zinc-100 file:border-0 file:rounded-lg file:px-4 file:py-2 file:mr-4"
                   />
                   <Input
                     value={imageTags}
                     onChange={(e) => setImageTags(e.target.value)}
                     placeholder="Add tags (comma separated)"
-                    className="bg-[#151517] border-[#2F3336] text-white placeholder-[#6E7E85]"
+                    className="bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
                   />
                   <div className="flex justify-end">
                     <Button 
                       onClick={handleCreateImagePost} 
                       disabled={loading}
-                      className="bg-[#B7CECE] hover:bg-[#BBBAC6] text-[#1C0F13]"
+                      className="bg-indigo-500 hover:bg-indigo-400 text-white"
                     >
                       <Send size={16} className="mr-2" />
                       {loading ? 'Posting...' : 'Post'}
@@ -304,26 +304,26 @@ const Feed = () => {
                     value={articleTitle}
                     onChange={(e) => setArticleTitle(e.target.value)}
                     placeholder="Article title"
-                    className="bg-[#151517] border-[#2F3336] text-white placeholder-[#6E7E85]"
+                    className="bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
                   />
                   <textarea
                     value={articleContent}
                     onChange={(e) => setArticleContent(e.target.value)}
                     placeholder="Write your article..."
-                    className="w-full p-3 bg-[#151517] border border-[#2F3336] text-white rounded-2xl focus:ring-2 focus:ring-[#B7CECE] focus:border-transparent resize-none placeholder-[#6E7E85]"
+                    className="w-full p-3 bg-zinc-950 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent resize-none placeholder-zinc-400"
                     rows="6"
                   />
                   <Input
                     value={articleTags}
                     onChange={(e) => setArticleTags(e.target.value)}
                     placeholder="Add tags (comma separated)"
-                    className="bg-[#151517] border-[#2F3336] text-white placeholder-[#6E7E85]"
+                    className="bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
                   />
                   <div className="flex justify-end">
                     <Button 
                       onClick={handleCreateArticlePost} 
                       disabled={loading}
-                      className="bg-[#B7CECE] hover:bg-[#BBBAC6] text-[#1C0F13]"
+                      className="bg-indigo-500 hover:bg-indigo-400 text-white"
                     >
                       <Send size={16} className="mr-2" />
                       {loading ? 'Publishing...' : 'Publish'}
@@ -339,14 +339,14 @@ const Feed = () => {
                     value={codeContent}
                     onChange={(e) => setCodeContent(e.target.value)}
                     placeholder="Describe your code..."
-                    className="w-full p-3 bg-[#151517] border border-[#2F3336] text-white rounded-2xl focus:ring-2 focus:ring-[#B7CECE] focus:border-transparent resize-none placeholder-[#6E7E85]"
+                    className="w-full p-3 bg-zinc-950 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent resize-none placeholder-zinc-400"
                     rows="2"
                   />
                   <textarea
                     value={codeSnippet}
                     onChange={(e) => setCodeSnippet(e.target.value)}
                     placeholder="Paste your code here..."
-                    className="w-full p-3 bg-[#151517] border border-[#2F3336] text-white rounded-2xl focus:ring-2 focus:ring-[#B7CECE] focus:border-transparent font-mono text-sm resize-none placeholder-[#6E7E85]"
+                    className="w-full p-3 bg-zinc-950 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent font-mono text-sm resize-none placeholder-zinc-400"
                     rows="6"
                   />
                   <div className="flex gap-2">
@@ -354,20 +354,20 @@ const Feed = () => {
                       value={codeLanguage}
                       onChange={(e) => setCodeLanguage(e.target.value)}
                       placeholder="Programming language"
-                      className="flex-1 bg-[#151517] border-[#2F3336] text-white placeholder-[#6E7E85]"
+                      className="flex-1 bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
                     />
                     <Input
                       value={codeTags}
                       onChange={(e) => setCodeTags(e.target.value)}
                       placeholder="Tags (comma separated)"
-                      className="flex-1 bg-[#151517] border-[#2F3336] text-white placeholder-[#6E7E85]"
+                      className="flex-1 bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
                     />
                   </div>
                   <div className="flex justify-end">
                     <Button 
                       onClick={handleCreateCodePost} 
                       disabled={loading}
-                      className="bg-[#B7CECE] hover:bg-[#BBBAC6] text-[#1C0F13]"
+                      className="bg-indigo-500 hover:bg-indigo-400 text-white"
                     >
                       <Send size={16} className="mr-2" />
                       {loading ? 'Posting...' : 'Post'}
@@ -382,9 +382,9 @@ const Feed = () => {
         {/* Feed Posts */}
         <div className="space-y-4">
           {posts.map(post => (
-            <Card key={post.id} className="p-6 bg-[#1C0F13] border-[#2F3336]">
+            <Card key={post.id} className="p-6 bg-zinc-900 border-zinc-800">
               <div className="flex space-x-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-[#1C0F13] to-[#6E7E85] rounded-2xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-r from-zinc-900 to-zinc-400 rounded-2xl flex items-center justify-center">
                   <span className="text-white font-bold text-sm">
                     {post.userName?.charAt(0) || 'U'}
                   </span>
@@ -393,12 +393,12 @@ const Feed = () => {
                 <div className="flex-1">
                   <div className="flex items-center space-x-2 mb-2">
                     <h3 className="font-semibold text-white">{post.userName}</h3>
-                    <span className="text-[#6E7E85] text-sm">@{post.userGithubUsername}</span>
-                    <span className="text-[#2F3336] text-sm">•</span>
-                    <span className="text-[#6E7E85] text-sm">
+                    <span className="text-zinc-400 text-sm">@{post.userGithubUsername}</span>
+                    <span className="text-zinc-800 text-sm">•</span>
+                    <span className="text-zinc-400 text-sm">
                       {new Date(post.createdAt).toLocaleDateString()}
                     </span>
-                    <span className="px-2 py-1 bg-[#6E7E85] text-white rounded-full text-xs capitalize">
+                    <span className="px-2 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs capitalize">
                       {post.postType?.toLowerCase()}
                     </span>
                   </div>
@@ -408,14 +408,14 @@ const Feed = () => {
                   {post.tags && post.tags.length > 0 && (
                     <div className="flex flex-wrap gap-1 mb-3">
                       {post.tags.map(tag => (
-                        <span key={tag} className="bg-[#6E7E85] text-white px-2 py-1 rounded-xl text-xs">
+                        <span key={tag} className="bg-zinc-800 text-zinc-300 px-2 py-1 rounded-xl text-xs">
                           #{tag}
                         </span>
                       ))}
                     </div>
                   )}
                   
-                  <div className="flex space-x-6 text-[#6E7E85]">
+                  <div className="flex space-x-6 text-zinc-400">
                     <button 
                       onClick={() => handleLike(post.id)}
                       className="flex items-center space-x-1 hover:text-red-500 transition-colors"
@@ -423,11 +423,11 @@ const Feed = () => {
                       <Heart size={18} />
                       <span>{post.likes || 0}</span>
                     </button>
-                    <button className="flex items-center space-x-1 hover:text-[#B7CECE] transition-colors">
+                    <button className="flex items-center space-x-1 hover:text-indigo-400 transition-colors">
                       <MessageCircle size={18} />
                       <span>{post.comments || 0}</span>
                     </button>
-                    <button className="flex items-center space-x-1 hover:text-[#B7CECE] transition-colors">
+                    <button className="flex items-center space-x-1 hover:text-indigo-400 transition-colors">
                       <Share size={18} />
                       <span>{post.shares || 0}</span>
                     </button>

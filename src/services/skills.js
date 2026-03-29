@@ -2,12 +2,14 @@ import api from './api'
 
 export const skillsService = {
   async extractSkills() {
-    const response = await api.post('/skills/extract')
+    const username = localStorage.getItem('githubUsername')
+    const response = await api.post('/skills/extract', username ? { username } : undefined)
     return response.data
   },
 
   async getMySkills() {
-    const response = await api.get('/skills/me')
+    const username = localStorage.getItem('githubUsername')
+    const response = await api.get(username ? `/skills/me?username=${encodeURIComponent(username)}` : '/skills/me')
     return response.data.data
   },
 

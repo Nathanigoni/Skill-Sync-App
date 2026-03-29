@@ -44,12 +44,12 @@ const Register = () => {
     <div className="max-w-md mx-auto py-12">
       <Card className="p-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-navy-800">Create Account</h1>
-          <p className="text-gray-600 mt-2">Start building your portfolio</p>
+          <h1 className="text-3xl font-bold text-indigo-400">Create Account</h1>
+          <p className="text-zinc-400 mt-2">Start building your portfolio</p>
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-2xl mb-6">
+          <div className="bg-red-900\/50 border border-red-800 text-red-400 px-4 py-3 rounded-2xl mb-6">
             {error}
           </div>
         )}
@@ -104,9 +104,9 @@ const Register = () => {
         </form>
 
         <div className="text-center mt-6">
-          <p className="text-gray-600">
+          <p className="text-zinc-400">
             Already have an account?{' '}
-            <Link to="/login" className="text-navy-800 hover:text-navy-700 font-medium">
+            <Link to="/login" className="text-indigo-400 hover:text-indigo-300 font-medium">
               Sign in
             </Link>
           </p>

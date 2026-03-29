@@ -59,23 +59,13 @@ const Skills = () => {
     }
   }
 
-  const getProficiencyColor = (proficiency) => {
-    switch (proficiency) {
-      case 'BEGINNER': return 'from-green-500 to-green-600'
-      case 'INTERMEDIATE': return 'from-blue-500 to-blue-600'
-      case 'ADVANCED': return 'from-purple-500 to-purple-600'
-      case 'EXPERT': return 'from-red-500 to-red-600'
-      default: return 'from-gray-500 to-gray-600'
-    }
-  }
-
   const getCategoryColor = (category) => {
     switch (category) {
-      case 'LANGUAGE': return 'bg-[#1C0F13] text-white'
-      case 'FRAMEWORK': return 'bg-[#6E7E85] text-white'
-      case 'TOOL': return 'bg-[#B7CECE] text-[#1C0F13]'
-      case 'DATABASE': return 'bg-[#BBBAC6] text-[#1C0F13]'
-      default: return 'bg-gray-100 text-gray-800'
+      case 'LANGUAGE': return 'bg-zinc-900 text-white'
+      case 'FRAMEWORK': return 'bg-zinc-800 text-zinc-300'
+      case 'TOOL': return 'bg-indigo-500 text-white'
+      case 'DATABASE': return 'bg-indigo-400 text-white'
+      default: return 'bg-zinc-800 text-zinc-200'
     }
   }
 
@@ -93,8 +83,8 @@ const Skills = () => {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#B7CECE] border-t-[#1C0F13] mx-auto mb-4"></div>
-          <p className="text-[#6E7E85]">Loading your skills...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-indigo-400 border-t-zinc-900 mx-auto mb-4"></div>
+          <p className="text-zinc-400">Loading your skills...</p>
         </div>
       </div>
     )
@@ -109,18 +99,18 @@ const Skills = () => {
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
         <div>
           <div className="flex items-center space-x-3 mb-2">
-            <div className="p-2 bg-gradient-to-r from-[#1C0F13] to-[#6E7E85] rounded-lg">
+            <div className="p-2 bg-gradient-to-r from-zinc-900 to-zinc-400 rounded-lg">
               <Code2 className="text-white" size={24} />
             </div>
-            <h1 className="text-3xl font-bold text-[#1C0F13]">Skills & Expertise</h1>
+            <h1 className="text-3xl font-bold text-zinc-100">Skills & Expertise</h1>
           </div>
-          <p className="text-[#6E7E85] text-lg">Manage and showcase your technical skills</p>
+          <p className="text-zinc-400 text-lg">Manage and showcase your technical skills</p>
         </div>
         
         <Button 
           onClick={handleExtractSkills} 
           disabled={extracting}
-          className="bg-gradient-to-r from-[#B7CECE] to-[#BBBAC6] text-[#1C0F13] font-semibold hover:shadow-md transition-all"
+          className="bg-gradient-to-r from-indigo-500 to-indigo-400 text-white font-semibold hover:shadow-md transition-all"
         >
           <RefreshCw className={`mr-2 ${extracting ? 'animate-spin' : ''}`} size={20} />
           {extracting ? 'Extracting...' : 'Extract from GitHub'}
@@ -129,61 +119,61 @@ const Skills = () => {
 
       {/* Skills Overview - GitHub stats style */}
       <div className="grid md:grid-cols-4 gap-6">
-        <Card className="p-6 text-center border border-[#E2E2E2]">
-          <div className="w-12 h-12 bg-gradient-to-r from-[#1C0F13] to-[#6E7E85] rounded-lg flex items-center justify-center mx-auto mb-3">
+        <Card className="p-6 text-center border border-zinc-800">
+          <div className="w-12 h-12 bg-gradient-to-r from-zinc-900 to-zinc-400 rounded-lg flex items-center justify-center mx-auto mb-3">
             <Code2 className="text-white" size={24} />
           </div>
-          <div className="text-2xl font-bold text-[#1C0F13]">{totalSkills}</div>
-          <div className="text-sm text-[#6E7E85]">Total Skills</div>
+          <div className="text-2xl font-bold text-zinc-100">{totalSkills}</div>
+          <div className="text-sm text-zinc-400">Total Skills</div>
         </Card>
 
-        <Card className="p-6 text-center border border-[#E2E2E2]">
-          <div className="w-12 h-12 bg-gradient-to-r from-[#B7CECE] to-[#BBBAC6] rounded-lg flex items-center justify-center mx-auto mb-3">
-            <Check className="text-[#1C0F13]" size={24} />
+        <Card className="p-6 text-center border border-zinc-800">
+          <div className="w-12 h-12 bg-gradient-to-r from-indigo-400 to-indigo-300 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <Check className="text-zinc-100" size={24} />
           </div>
-          <div className="text-2xl font-bold text-[#1C0F13]">{verifiedSkills}</div>
-          <div className="text-sm text-[#6E7E85]">Verified Skills</div>
+          <div className="text-2xl font-bold text-zinc-100">{verifiedSkills}</div>
+          <div className="text-sm text-zinc-400">Verified Skills</div>
         </Card>
 
-        <Card className="p-6 text-center border border-[#E2E2E2]">
-          <div className="w-12 h-12 bg-gradient-to-r from-[#6E7E85] to-[#1C0F13] rounded-lg flex items-center justify-center mx-auto mb-3">
+        <Card className="p-6 text-center border border-zinc-800">
+          <div className="w-12 h-12 bg-gradient-to-r from-zinc-400 to-zinc-900 rounded-lg flex items-center justify-center mx-auto mb-3">
             <TrendingUp className="text-white" size={24} />
           </div>
-          <div className="text-2xl font-bold text-[#1C0F13]">
+          <div className="text-2xl font-bold text-zinc-100">
             {totalSkills > 0 ? Math.round((verifiedSkills / totalSkills) * 100) : 0}%
           </div>
-          <div className="text-sm text-[#6E7E85]">Completion</div>
+          <div className="text-sm text-zinc-400">Completion</div>
         </Card>
 
-        <Card className="p-6 text-center border border-[#E2E2E2]">
-          <div className="w-12 h-12 bg-gradient-to-r from-[#BBBAC6] to-[#B7CECE] rounded-lg flex items-center justify-center mx-auto mb-3">
-            <Zap className="text-[#1C0F13]" size={24} />
+        <Card className="p-6 text-center border border-zinc-800">
+          <div className="w-12 h-12 bg-gradient-to-r from-indigo-300 to-indigo-400 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <Zap className="text-zinc-100" size={24} />
           </div>
-          <div className="text-2xl font-bold text-[#1C0F13]">
+          <div className="text-2xl font-bold text-zinc-100">
             {skills.filter(s => s.proficiency === 'EXPERT' || s.proficiency === 'ADVANCED').length}
           </div>
-          <div className="text-sm text-[#6E7E85]">Advanced Skills</div>
+          <div className="text-sm text-zinc-400">Advanced Skills</div>
         </Card>
       </div>
 
       {/* Skills List - Professional layout */}
-      <Card className="p-6 border border-[#E2E2E2]">
+      <Card className="p-6 border border-zinc-800">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6">
           <div>
-            <h2 className="text-xl font-bold text-[#1C0F13] mb-2">Your Skills</h2>
-            <p className="text-[#6E7E85]">
+            <h2 className="text-xl font-bold text-zinc-100 mb-2">Your Skills</h2>
+            <p className="text-zinc-400">
               {verifiedSkills} of {totalSkills} skills verified • 
               Sorted by proficiency and usage
             </p>
           </div>
           
           <div className="flex items-center space-x-2 mt-4 lg:mt-0">
-            <div className="flex items-center space-x-1 text-sm text-[#6E7E85]">
+            <div className="flex items-center space-x-1 text-sm text-zinc-400">
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
               <span>Verified</span>
             </div>
-            <div className="flex items-center space-x-1 text-sm text-[#6E7E85]">
-              <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
+            <div className="flex items-center space-x-1 text-sm text-zinc-400">
+              <div className="w-3 h-3 bg-zinc-700 rounded-full"></div>
               <span>Unverified</span>
             </div>
           </div>
@@ -191,26 +181,36 @@ const Skills = () => {
 
         {skills.length > 0 ? (
           <div className="space-y-4">
-            {skills.map(skill => (
-              <div key={skill.id} className="flex items-center justify-between p-4 border border-[#E2E2E2] rounded-lg hover:border-[#B7CECE] transition-all duration-300">
+            {skills.map((skill) => {
+              const category = typeof skill.category === 'string' && skill.category.trim() ? skill.category.trim() : 'GENERAL'
+              const proficiency =
+                typeof skill.proficiency === 'string' && skill.proficiency.trim()
+                  ? skill.proficiency.trim().toUpperCase()
+                  : 'BEGINNER'
+              const usageCount = Number.isFinite(Number(skill.usageCount)) ? Number(skill.usageCount) : 0
+              const lineCount = Number.isFinite(Number(skill.lineCount)) ? Number(skill.lineCount) : 0
+              const confidence = Number.isFinite(Number(skill.confidence)) ? Number(skill.confidence) : 0
+
+              return (
+              <div key={skill.id} className="flex items-center justify-between p-4 border border-zinc-800 rounded-lg hover:border-indigo-400 transition-all duration-300">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="flex items-center space-x-3 flex-1">
-                      <h3 className="font-semibold text-[#1C0F13] text-lg">{skill.name}</h3>
-                      <span className={`px-3 py-1 rounded-lg text-xs font-medium ${getCategoryColor(skill.category)}`}>
-                        {skill.category.toLowerCase()}
+                      <h3 className="font-semibold text-zinc-100 text-lg">{skill.name}</h3>
+                      <span className={`px-3 py-1 rounded-lg text-xs font-medium ${getCategoryColor(category)}`}>
+                        {category.toLowerCase()}
                       </span>
                     </div>
                     
                     {skill.verified && (
-                      <div className="flex items-center space-x-1 bg-green-50 text-green-700 px-2 py-1 rounded-lg text-xs font-medium">
+                      <div className="flex items-center space-x-1 bg-green-900\/50 text-green-400 px-2 py-1 rounded-lg text-xs font-medium">
                         <Check size={12} />
                         <span>Verified</span>
                       </div>
                     )}
                   </div>
                   
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-[#6E7E85]">
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-400">
                     {/* Proficiency Bar */}
                     <div className="flex items-center space-x-2">
                       <Target size={14} />
@@ -219,15 +219,15 @@ const Skills = () => {
                           <div
                             key={level}
                             className={`w-3 h-3 rounded-full ${
-                              level <= getProficiencyLevel(skill.proficiency) 
-                                ? 'bg-[#1C0F13]' 
-                                : 'bg-[#E2E2E2]'
+                              level <= getProficiencyLevel(proficiency)
+                                ? 'bg-zinc-100' 
+                                : 'bg-zinc-800'
                             }`}
                           />
                         ))}
                       </div>
-                      <span className="font-medium text-[#1C0F13] text-xs">
-                        {skill.proficiency}
+                      <span className="font-medium text-zinc-100 text-xs">
+                        {proficiency}
                       </span>
                     </div>
 
@@ -235,15 +235,15 @@ const Skills = () => {
                     <div className="flex items-center space-x-4">
                       <div className="flex items-center space-x-1">
                         <GitBranch size={14} />
-                        <span>{skill.usageCount} repos</span>
+                        <span>{usageCount} repos</span>
                       </div>
                       <div className="flex items-center space-x-1">
                         <Code2 size={14} />
-                        <span>{skill.lineCount.toLocaleString()} lines</span>
+                        <span>{lineCount.toLocaleString()} lines</span>
                       </div>
                       <div className="flex items-center space-x-1">
                         <TrendingUp size={14} />
-                        <span>{(skill.confidence * 100).toFixed(0)}% confidence</span>
+                        <span>{(confidence * 100).toFixed(0)}% confidence</span>
                       </div>
                     </div>
                   </div>
@@ -255,7 +255,7 @@ const Skills = () => {
                     <Button
                       size="sm"
                       onClick={() => handleVerifySkill(skill.id, true)}
-                      className="bg-[#B7CECE] hover:bg-[#BBBAC6] text-[#1C0F13] font-medium"
+                      className="bg-indigo-500 hover:bg-indigo-400 text-white font-medium"
                       title="Verify skill"
                     >
                       <Check size={16} />
@@ -265,7 +265,7 @@ const Skills = () => {
                       variant="outline"
                       size="sm"
                       onClick={() => handleVerifySkill(skill.id, false)}
-                      className="border-[#E2E2E2] text-[#6E7E85] hover:bg-[#E2E2E2] font-medium"
+                      className="border-zinc-800 text-zinc-400 hover:bg-zinc-800 font-medium"
                       title="Unverify skill"
                     >
                       <X size={16} />
@@ -276,27 +276,28 @@ const Skills = () => {
                     variant="outline"
                     size="sm"
                     onClick={() => handleDeleteSkill(skill.id)}
-                    className="border-[#E2E2E2] text-[#6E7E85] hover:bg-[#E2E2E2] font-medium"
+                    className="border-zinc-800 text-zinc-400 hover:bg-zinc-800 font-medium"
                     title="Delete skill"
                   >
                     <Trash2 size={16} />
                   </Button>
                 </div>
               </div>
-            ))}
+              )
+            })}
           </div>
         ) : (
           <div className="text-center py-12">
-            <div className="w-20 h-20 bg-gradient-to-r from-[#B7CECE] to-[#BBBAC6] rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <Code2 className="text-[#1C0F13]" size={32} />
+            <div className="w-20 h-20 bg-gradient-to-r from-indigo-400 to-indigo-300 rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <Code2 className="text-zinc-100" size={32} />
             </div>
-            <h3 className="text-xl font-bold text-[#1C0F13] mb-3">No Skills Found</h3>
-            <p className="text-[#6E7E85] max-w-md mx-auto mb-6 leading-relaxed">
+            <h3 className="text-xl font-bold text-zinc-100 mb-3">No Skills Found</h3>
+            <p className="text-zinc-400 max-w-md mx-auto mb-6 leading-relaxed">
               Start by extracting skills from your GitHub repositories to showcase your technical expertise.
             </p>
             <Button 
               onClick={handleExtractSkills}
-              className="bg-gradient-to-r from-[#B7CECE] to-[#BBBAC6] text-[#1C0F13] font-semibold hover:shadow-md transition-all"
+              className="bg-gradient-to-r from-indigo-500 to-indigo-400 text-white font-semibold hover:shadow-md transition-all"
             >
               <RefreshCw className="mr-2" size={20} />
               Extract Skills from GitHub
