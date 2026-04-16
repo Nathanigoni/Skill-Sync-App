@@ -15,7 +15,7 @@ const Input = ({ label, icon: Icon, error, className = '', ...props }) => {
           </div>
         )}
         <input
-          className={`w-full px-3 py-2 border border-zinc-800 rounded-lg bg-zinc-950 text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed ${
+          className={`w-full px-3 py-2 border border-zinc-800 rounded-lg bg-zinc-950 text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed ${
             Icon ? 'pl-10' : ''
           } ${error ? 'border-red-500 focus:ring-red-500' : ''} ${className}`}
           {...props}

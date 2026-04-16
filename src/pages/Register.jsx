@@ -44,7 +44,7 @@ const Register = () => {
     <div className="max-w-md mx-auto py-12">
       <Card className="p-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-indigo-400">Create Account</h1>
+          <h1 className="text-3xl font-bold text-zinc-400">Create Account</h1>
           <p className="text-zinc-400 mt-2">Start building your portfolio</p>
         </div>
 
@@ -106,7 +106,7 @@ const Register = () => {
         <div className="text-center mt-6">
           <p className="text-zinc-400">
             Already have an account?{' '}
-            <Link to="/login" className="text-indigo-400 hover:text-indigo-300 font-medium">
+            <Link to="/login" className="text-zinc-400 hover:text-zinc-300 font-medium">
               Sign in
             </Link>
           </p>

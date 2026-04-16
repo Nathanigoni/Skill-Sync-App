@@ -43,7 +43,7 @@ const Login = () => {
     <div className="max-w-md mx-auto py-12">
       <Card className="p-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-indigo-400">Welcome Back</h1>
+          <h1 className="text-3xl font-bold text-zinc-400">Welcome Back</h1>
           <p className="text-zinc-400 mt-2">Sign in to your account</p>
         </div>
 
@@ -88,7 +88,7 @@ const Login = () => {
         <div className="text-center mt-6">
           <p className="text-zinc-400">
             Don't have an account?{' '}
-            <Link to="/register" className="text-indigo-400 hover:text-indigo-300 font-medium">
+            <Link to="/register" className="text-zinc-400 hover:text-zinc-300 font-medium">
               Sign up
             </Link>
           </p>

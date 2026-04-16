@@ -8,26 +8,6 @@ export default [
     ignores: ['dist'],
   },
   {
-    files: [
-      'server.js',
-      'vite.config.js',
-      'postcss.config.js',
-      'tailwind.config.js',
-      'eslint.config.js',
-    ],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.node,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-      },
-    },
-    rules: {
-      ...js.configs.recommended.rules,
-    },
-  },
-  {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
       ecmaVersion: 2020,

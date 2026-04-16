@@ -15,7 +15,7 @@
   }
   
   ::selection {
-    @apply bg-indigo-400/30 text-zinc-100;
+    @apply bg-zinc-400/30 text-zinc-100;
   }
 }
 
@@ -45,6 +45,6 @@
   }
   
   .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-indigo-400/50;
+    @apply focus:outline-none focus:ring-2 focus:ring-zinc-400/50;
   }
 }

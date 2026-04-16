@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
-import { Menu, X, User, Search, Bell, MessageCircle, Home, LayoutDashboard, Folder, BarChart3 } from 'lucide-react'
+import { Menu, X, User, Search, Bell, MessageCircle, Home, LayoutDashboard, Folder, BarChart3, Hash } from 'lucide-react'
 import { useState } from 'react'
 
 const Header = () => {
@@ -15,6 +15,8 @@ const Header = () => {
   // Mobile navigation items
   const mobileNavItems = [
     { path: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { path: '/explore', icon: Hash, label: 'Explore' },
+    { path: '/notifications', icon: Bell, label: 'Notifications' },
     { path: '/projects', icon: Folder, label: 'Projects' },
     { path: '/', icon: Home, label: 'Home' },
     { path: '/analytics', icon: BarChart3, label: 'Analytics' },
@@ -24,7 +26,7 @@ const Header = () => {
   return (
     <>
       {/* Main header with dark background and subtle border */}
-      <header className="bg-zinc-950 shadow-sm border-b border-zinc-800 hidden md:block">
+      <header className="bg-zinc-950 border-b border-zinc-800 sticky top-0 z-50">
         {/* Container with max width and horizontal padding */}
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
@@ -36,11 +38,11 @@ const Header = () => {
               {/* Logo link to home page */}
               <Link to="/" className="flex items-center space-x-3">
                 {/* Logo icon with gradient background */}
-                <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-zinc-800 rounded-lg flex items-center justify-center shadow-sm">
+                <div className="w-10 h-10 bg-gradient-to-r from-zinc-500 to-zinc-800 rounded-lg flex items-center justify-center shadow-sm">
                   <span className="text-white font-bold text-sm">SS</span>
                 </div>
                 {/* Company name text */}
-                <span className="text-xl font-semibold text-indigo-400 tracking-tight">SkillSync</span>
+                <span className="text-xl font-semibold text-zinc-400 tracking-tight">SkillSync</span>
               </Link>
             </div>
 
@@ -59,7 +61,7 @@ const Header = () => {
                       <input
                         type="text"
                         placeholder="Search skills or people..."
-                        className="pl-10 pr-4 py-3 w-full border border-blue-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-transparent text-sm bg-zinc-950"
+                        className="pl-10 pr-4 py-3 w-full border border-zinc-800 rounded-xl focus:outline-none focus:ring-1 focus:ring-zinc-500 focus:border-transparent text-sm bg-zinc-950"
                       />
                     </div>
                   </div>
@@ -67,11 +69,11 @@ const Header = () => {
                   {/* User Actions - Notification and messaging icons */}
                   <div className="flex items-center space-x-2">
                     {/* Messages button */}
-                    <button className="p-2 text-zinc-400 hover:text-indigo-400 hover:bg-zinc-800 rounded-lg transition-all duration-200">
+                    <button className="p-2 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 rounded-lg transition-all duration-200">
                       <MessageCircle size={20} />
                     </button>
                     {/* Notifications button */}
-                    <button className="p-2 text-zinc-400 hover:text-indigo-400 hover:bg-zinc-800 rounded-lg transition-all duration-200">
+                    <button className="p-2 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 rounded-lg transition-all duration-200">
                       <Bell size={20} />
                     </button>
                     
@@ -81,7 +83,7 @@ const Header = () => {
                       <div className="flex items-center space-x-3">
                         {/* User avatar with gradient background */}
                         <Link to="/profile" className="flex items-center space-x-3">
-                          <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-zinc-800 rounded-full flex items-center justify-center text-white text-sm font-medium cursor-pointer">
+                          <div className="w-8 h-8 bg-gradient-to-r from-zinc-500 to-zinc-800 rounded-full flex items-center justify-center text-white text-sm font-medium cursor-pointer">
                           {/* Display first letter of user's name or user icon */}
                           {user.profile?.name?.charAt(0) || <User size={16} />}
                         </div></Link>
@@ -95,14 +97,14 @@ const Header = () => {
                   {/* Login link */}
                   <Link 
                     to="/login" 
-                    className="text-zinc-400 hover:text-indigo-400 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-zinc-800"
+                    className="text-zinc-400 hover:text-zinc-200 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-zinc-800"
                   >
                     Sign in
                   </Link>
                   {/* Registration link with prominent styling */}
                   <Link 
                     to="/register" 
-                    className="bg-indigo-500 text-white px-6 py-2 rounded-lg hover:bg-indigo-600 transition-colors font-medium shadow-sm hover:shadow-md"
+                    className="bg-zinc-500 text-white px-6 py-2 rounded-lg hover:bg-zinc-600 transition-colors font-medium shadow-sm hover:shadow-md"
                   >
                     Join now
                   </Link>
@@ -130,7 +132,7 @@ const Header = () => {
                   <div className="px-4 py-2">
                     <div className="flex items-center space-x-3 mb-4">
                       {/* User avatar */}
-                      <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-zinc-800 rounded-full flex items-center justify-center text-white font-medium">
+                      <div className="w-10 h-10 bg-gradient-to-r from-zinc-500 to-zinc-800 rounded-full flex items-center justify-center text-white font-medium">
                         {user.profile?.name?.charAt(0) || <User size={18} />}
                       </div>
                       {/* User info */}
@@ -145,19 +147,19 @@ const Header = () => {
                   <div className="space-y-1">
                     <Link 
                       to="/dashboard" 
-                      className="block px-4 py-3 text-zinc-300 hover:text-indigo-400 hover:bg-zinc-900 rounded-lg transition-colors font-medium"
+                      className="block px-4 py-3 text-zinc-300 hover:text-zinc-200 hover:bg-zinc-900 rounded-lg transition-colors font-medium"
                     >
                       Dashboard
                     </Link>
                     <Link 
                       to="/network" 
-                      className="block px-4 py-3 text-zinc-300 hover:text-indigo-400 hover:bg-zinc-900 rounded-lg transition-colors font-medium"
+                      className="block px-4 py-3 text-zinc-300 hover:text-zinc-200 hover:bg-zinc-900 rounded-lg transition-colors font-medium"
                     >
                       Network
                     </Link>
                     <Link 
                       to="/skills" 
-                      className="block px-4 py-3 text-zinc-300 hover:text-indigo-400 hover:bg-zinc-900 rounded-lg transition-colors font-medium"
+                      className="block px-4 py-3 text-zinc-300 hover:text-zinc-200 hover:bg-zinc-900 rounded-lg transition-colors font-medium"
                     >
                       Skills
                     </Link>
@@ -167,7 +169,7 @@ const Header = () => {
                   <div className="pt-4 border-t border-zinc-800 mt-4">
                     <button
                       onClick={logout}
-                      className="w-full text-left px-4 py-3 text-zinc-300 hover:text-indigo-400 hover:bg-zinc-900 rounded-lg transition-colors font-medium"
+                      className="w-full text-left px-4 py-3 text-zinc-300 hover:text-zinc-200 hover:bg-zinc-900 rounded-lg transition-colors font-medium"
                     >
                       Sign out
                     </button>
@@ -179,14 +181,14 @@ const Header = () => {
                   {/* Login link */}
                   <Link 
                     to="/login" 
-                    className="block px-4 py-3 text-zinc-300 hover:text-indigo-400 hover:bg-zinc-900 rounded-lg transition-colors font-medium"
+                    className="block px-4 py-3 text-zinc-300 hover:text-zinc-200 hover:bg-zinc-900 rounded-lg transition-colors font-medium"
                   >
                     Sign in
                   </Link>
                   {/* Registration link */}
                   <Link 
                     to="/register" 
-                    className="block px-4 py-3 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors font-medium text-center shadow-sm"
+                    className="block px-4 py-3 bg-zinc-500 text-white rounded-lg hover:bg-zinc-600 transition-colors font-medium text-center shadow-sm"
                   >
                     Join SkillSync
                   </Link>
@@ -211,7 +213,7 @@ const Header = () => {
                 to={item.path}
                 className={`flex flex-col items-center space-y-1 p-2 rounded-lg transition-all duration-200 ${
                   isActive 
-                    ? 'text-indigo-400 bg-zinc-800' 
+                    ? 'text-zinc-400 bg-zinc-800' 
                     : 'text-zinc-500 hover:text-zinc-100'
                 }`}
               >
@@ -227,10 +229,10 @@ const Header = () => {
       <div className="md:hidden fixed top-0 left-0 right-0 bg-zinc-950 border-b border-zinc-800 z-40 py-3">
         <div className="flex justify-center items-center">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-zinc-800 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-r from-zinc-500 to-zinc-800 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xs">SS</span>
             </div>
-            <span className="text-lg font-semibold text-indigo-400">SkillSync</span>
+            <span className="text-lg font-semibold text-zinc-400">SkillSync</span>
           </div>
         </div>
       </div>

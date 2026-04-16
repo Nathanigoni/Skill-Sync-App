@@ -63,8 +63,8 @@ const Skills = () => {
     switch (category) {
       case 'LANGUAGE': return 'bg-zinc-900 text-white'
       case 'FRAMEWORK': return 'bg-zinc-800 text-zinc-300'
-      case 'TOOL': return 'bg-indigo-500 text-white'
-      case 'DATABASE': return 'bg-indigo-400 text-white'
+      case 'TOOL': return 'bg-zinc-500 text-white'
+      case 'DATABASE': return 'bg-zinc-400 text-white'
       default: return 'bg-zinc-800 text-zinc-200'
     }
   }
@@ -83,7 +83,7 @@ const Skills = () => {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-indigo-400 border-t-zinc-900 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-zinc-400 border-t-zinc-900 mx-auto mb-4"></div>
           <p className="text-zinc-400">Loading your skills...</p>
         </div>
       </div>
@@ -110,7 +110,7 @@ const Skills = () => {
         <Button 
           onClick={handleExtractSkills} 
           disabled={extracting}
-          className="bg-gradient-to-r from-indigo-500 to-indigo-400 text-white font-semibold hover:shadow-md transition-all"
+          className="bg-gradient-to-r from-zinc-500 to-zinc-400 text-white font-semibold hover:shadow-md transition-all"
         >
           <RefreshCw className={`mr-2 ${extracting ? 'animate-spin' : ''}`} size={20} />
           {extracting ? 'Extracting...' : 'Extract from GitHub'}
@@ -128,7 +128,7 @@ const Skills = () => {
         </Card>
 
         <Card className="p-6 text-center border border-zinc-800">
-          <div className="w-12 h-12 bg-gradient-to-r from-indigo-400 to-indigo-300 rounded-lg flex items-center justify-center mx-auto mb-3">
+          <div className="w-12 h-12 bg-gradient-to-r from-zinc-400 to-zinc-300 rounded-lg flex items-center justify-center mx-auto mb-3">
             <Check className="text-zinc-100" size={24} />
           </div>
           <div className="text-2xl font-bold text-zinc-100">{verifiedSkills}</div>
@@ -146,7 +146,7 @@ const Skills = () => {
         </Card>
 
         <Card className="p-6 text-center border border-zinc-800">
-          <div className="w-12 h-12 bg-gradient-to-r from-indigo-300 to-indigo-400 rounded-lg flex items-center justify-center mx-auto mb-3">
+          <div className="w-12 h-12 bg-gradient-to-r from-zinc-300 to-zinc-400 rounded-lg flex items-center justify-center mx-auto mb-3">
             <Zap className="text-zinc-100" size={24} />
           </div>
           <div className="text-2xl font-bold text-zinc-100">
@@ -192,7 +192,7 @@ const Skills = () => {
               const confidence = Number.isFinite(Number(skill.confidence)) ? Number(skill.confidence) : 0
 
               return (
-              <div key={skill.id} className="flex items-center justify-between p-4 border border-zinc-800 rounded-lg hover:border-indigo-400 transition-all duration-300">
+              <div key={skill.id} className="flex items-center justify-between p-4 border border-zinc-800 rounded-lg hover:border-zinc-400 transition-all duration-300">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="flex items-center space-x-3 flex-1">
@@ -255,7 +255,7 @@ const Skills = () => {
                     <Button
                       size="sm"
                       onClick={() => handleVerifySkill(skill.id, true)}
-                      className="bg-indigo-500 hover:bg-indigo-400 text-white font-medium"
+                      className="bg-zinc-500 hover:bg-zinc-400 text-white font-medium"
                       title="Verify skill"
                     >
                       <Check size={16} />
@@ -288,7 +288,7 @@ const Skills = () => {
           </div>
         ) : (
           <div className="text-center py-12">
-            <div className="w-20 h-20 bg-gradient-to-r from-indigo-400 to-indigo-300 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <div className="w-20 h-20 bg-gradient-to-r from-zinc-400 to-zinc-300 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <Code2 className="text-zinc-100" size={32} />
             </div>
             <h3 className="text-xl font-bold text-zinc-100 mb-3">No Skills Found</h3>
@@ -297,7 +297,7 @@ const Skills = () => {
             </p>
             <Button 
               onClick={handleExtractSkills}
-              className="bg-gradient-to-r from-indigo-500 to-indigo-400 text-white font-semibold hover:shadow-md transition-all"
+              className="bg-gradient-to-r from-zinc-500 to-zinc-400 text-white font-semibold hover:shadow-md transition-all"
             >
               <RefreshCw className="mr-2" size={20} />
               Extract Skills from GitHub

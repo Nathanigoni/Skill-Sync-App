@@ -25,9 +25,7 @@ const Sidebar = () => {
   const { user, logout } = useAuth()
   const location = useLocation()
 
-  if (!user) return null
-
-  const navigation = [
+  const navigation = user ? [
     { name: 'Home', href: '/', icon: Home },
     { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
     { name: 'Explore', href: '/explore', icon: Hash },
@@ -39,6 +37,9 @@ const Sidebar = () => {
     { name: 'Projects', href: '/projects', icon: Folder },
     { name: 'Skills', href: '/skills', icon: Code2 },
     { name: 'Analytics', href: '/analytics', icon: BarChart3 },
+  ] : [
+    { name: 'Explore', href: '/explore', icon: Hash },
+    { name: 'Settings', href: '/settings', icon: MoreHorizontal },
   ]
 
   const handleLogout = async () => {
@@ -50,16 +51,7 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="hidden lg:flex flex-col w-64 bg-zinc-950 h-screen sticky top-0 border-r border-zinc-800 overflow-hidden">
-      {/* Logo Section */}
-      <div className="p-4 flex-shrink-0">
-        <Link to="/" className="flex items-center space-x-3 p-3 rounded-full hover:bg-zinc-900 transition-all duration-200 w-fit">
-          <div className="w-8 h-8 bg-gradient-to-r from-zinc-900 to-zinc-400 rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-sm">SS</span>
-          </div>
-          <span className="text-xl font-bold text-white">SkillSync</span>
-        </Link>
-      </div>
+    <div className="hidden md:flex flex-col w-64 flex-shrink-0 bg-zinc-950 h-[calc(100vh-4rem)] sticky top-16 border-r border-zinc-800 overflow-hidden pt-4">
 
       {/* Main Navigation - Fixed height with no scroll */}
       <nav className="flex-1 px-3 overflow-hidden">
@@ -91,32 +83,47 @@ const Sidebar = () => {
 
       {/* User Profile & Logout Section - Fixed at bottom */}
       <div className="p-4 flex-shrink-0 space-y-2">
-        {/* User Profile */}
-        <div className="flex items-center justify-between p-3 rounded-full hover:bg-zinc-900 transition-all duration-200 cursor-pointer">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-zinc-900 to-zinc-400 rounded-full flex items-center justify-center">
-              {user.profile?.avatar ? (
-                <img 
-                  src={user.profile.avatar} 
-                  className="w-full h-full rounded-full object-cover"
-                />
-              ) : (
-                <User className="text-white" size={18} />
-              )}
+        {user ? (
+          <div className="flex items-center justify-between p-3 rounded-full hover:bg-zinc-900 transition-all duration-200 cursor-pointer group relative">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-r from-zinc-900 to-zinc-400 rounded-full flex items-center justify-center">
+                {user.profile?.avatar ? (
+                  <img 
+                    src={user.profile.avatar} 
+                    className="w-full h-full rounded-full object-cover"
+                  />
+                ) : (
+                  <User className="text-white" size={18} />
+                )}
+              </div>
+              <div className="flex flex-col hidden xl:block">
+                <span className="text-white font-bold text-sm truncate max-w-[120px]">{user.profile?.name || 'User'}</span>
+                <span className="text-zinc-500 text-xs truncate max-w-[120px]">@{user.profile?.githubUsername || 'username'}</span>
+              </div>
             </div>
-            <div className="flex flex-col">
+            <MoreHorizontal size={20} className="text-zinc-400" />
+            
+            {/* Logout Dropdown (simplified for now, just a button on hover) */}
+            <div className="absolute bottom-full left-0 w-full mb-2 hidden group-hover:block">
+              <button
+                onClick={handleLogout}
+                className="flex items-center space-x-2 w-full px-4 py-3 bg-zinc-900 rounded-xl text-white hover:bg-zinc-800 shadow-lg border border-zinc-800"
+              >
+                <LogOut size={18} />
+                <span className="font-medium">Log out @{user.profile?.githubUsername || 'username'}</span>
+              </button>
             </div>
           </div>
-          <MoreHorizontal size={20} className="text-zinc-400" />
-         <button
-          onClick={handleLogout}
-          className="flex items-center space-x-1 w-full px-4 py-3 rounded-full text-zinc-200"
-        >
-          <LogOut size={14} className="" />
-          <span className="text-lg font-medium">Logout</span>
-        </button>
-        </div>
-
+        ) : (
+          <div className="space-y-3">
+            <Link to="/login" className="block w-full py-3 px-4 text-center text-zinc-400 font-bold rounded-full border border-zinc-800 hover:bg-zinc-900 transition-colors">
+              Log in
+            </Link>
+            <Link to="/register" className="block w-full py-3 px-4 text-center bg-white text-black font-bold rounded-full hover:bg-zinc-200 transition-colors">
+              Sign up
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   )

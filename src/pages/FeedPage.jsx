@@ -52,7 +52,7 @@ const FeedPage = () => {
  
           {loading ? (
             <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-4 border-indigo-400 border-t-zinc-950 mx-auto mb-4"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-4 border-zinc-400 border-t-zinc-950 mx-auto mb-4"></div>
               <p className="text-zinc-400">Loading posts...</p>
             </div>
           ) : (
@@ -105,7 +105,7 @@ const FeedPage = () => {
             <div className="space-y-2">
               {['React', 'JavaScript', 'WebDev', 'Career', 'OpenSource'].map((topic) => (
                 <div key={topic} className="flex items-center justify-between">
-                  <span className="text-sm text-zinc-300 hover:text-indigo-400 cursor-pointer">#{topic}</span>
+                  <span className="text-sm text-zinc-300 hover:text-zinc-200 cursor-pointer">#{topic}</span>
                   <span className="text-xs text-zinc-500">1.2k posts</span>
                 </div>
               ))}

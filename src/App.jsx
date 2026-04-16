@@ -13,6 +13,10 @@ import Analytics from './pages/Analytics'
 import Profile from './pages/Profile'
 import Skills from './pages/Skills'
 import Feed from './pages/FeedPage'
+import Explore from './pages/Explore'
+import Notifications from './pages/Notifications'
+import Messages from './pages/Messages'
+import Lists from './pages/Lists'
 import ProtectedRoute from './components/shared/ProtectedRoute'
 
 function ComingSoon({ title }) {
@@ -38,9 +42,9 @@ function App() {
         >
           <div className="min-h-screen bg-zinc-950">
             <Header />
-            <div className="flex">
+            <div className="max-w-7xl mx-auto px-6 flex">
               <Sidebar />
-              <main className="flex-1 p-6 lg:p-8">
+              <main className="flex-1 min-w-0">
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/login" element={<Login />} />
@@ -97,7 +101,7 @@ function App() {
                     path="/explore"
                     element={
                       <ProtectedRoute>
-                        <ComingSoon title="Explore" />
+                        <Explore />
                       </ProtectedRoute>
                     }
                   />
@@ -105,7 +109,7 @@ function App() {
                     path="/notifications"
                     element={
                       <ProtectedRoute>
-                        <ComingSoon title="Notifications" />
+                        <Notifications />
                       </ProtectedRoute>
                     }
                   />
@@ -113,7 +117,7 @@ function App() {
                     path="/messages"
                     element={
                       <ProtectedRoute>
-                        <ComingSoon title="Messages" />
+                        <Messages />
                       </ProtectedRoute>
                     }
                   />
@@ -129,7 +133,7 @@ function App() {
                     path="/lists"
                     element={
                       <ProtectedRoute>
-                        <ComingSoon title="Lists" />
+                        <Lists />
                       </ProtectedRoute>
                     }
                   />

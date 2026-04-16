@@ -148,7 +148,7 @@ const Profile = () => {
           <Card className="p-6 border border-zinc-800">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold text-zinc-100">Profile Information</h3>
-              <div className="w-10 h-10 bg-gradient-to-r from-indigo-400 to-indigo-300 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-r from-zinc-400 to-zinc-300 rounded-lg flex items-center justify-center">
                 <Edit className="text-zinc-100" size={20} />
               </div>
             </div>
@@ -183,7 +183,7 @@ const Profile = () => {
                   value={formData.bio}
                   onChange={(e) => setFormData({...formData, bio: e.target.value})}
                   rows={4}
-                  className="w-full px-3 py-2 border border-zinc-800 rounded-lg bg-zinc-950 text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-zinc-800 rounded-lg bg-zinc-950 text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:border-transparent"
                   placeholder="Describe your professional background, skills, and experience..."
                 />
                 <p className="text-sm text-zinc-400 mt-1">This appears on your public profile</p>
@@ -223,7 +223,7 @@ const Profile = () => {
                 <Button 
                   type="submit" 
                   disabled={loading} 
-                  className="bg-gradient-to-r from-indigo-500 to-indigo-400 text-white font-semibold hover:shadow-md transition-all"
+                  className="bg-gradient-to-r from-zinc-500 to-zinc-400 text-white font-semibold hover:shadow-md transition-all"
                 >
                   <Save className="mr-2" size={20} />
                   {loading ? 'Saving Changes...' : 'Save Profile'}
@@ -255,7 +255,7 @@ const Profile = () => {
                 />
                 <Button 
                   onClick={handleConnectGitHub} 
-                  className="w-full bg-gradient-to-r from-indigo-500 to-indigo-400 text-white font-semibold hover:shadow-md transition-all"
+                  className="w-full bg-gradient-to-r from-zinc-500 to-zinc-400 text-white font-semibold hover:shadow-md transition-all"
                   disabled={loading}
                 >
                   <Github className="mr-2" size={20} />
@@ -300,7 +300,7 @@ const Profile = () => {
           {githubStats && (
             <Card className="p-6 border border-zinc-800">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="p-2 bg-gradient-to-r from-indigo-400 to-indigo-300 rounded-lg">
+                <div className="p-2 bg-gradient-to-r from-zinc-400 to-zinc-300 rounded-lg">
                   <Award className="text-zinc-100" size={20} />
                 </div>
                 <h3 className="text-lg font-bold text-zinc-100">GitHub Stats</h3>

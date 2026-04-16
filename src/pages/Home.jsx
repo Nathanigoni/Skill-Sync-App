@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { feedService } from '../services/feed'
-import { Code2, BarChart3, Users, Heart, MessageCircle, Share, Send, Star, Type, Image, FileText, Code } from 'lucide-react'
-import Card from '../components/ui/Card'
+import { BarChart3, Heart, MessageCircle, Share, Type, Image, FileText, Code, MoreHorizontal } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Input from '../components/ui/Input'
 
@@ -171,9 +169,9 @@ const Home = () => {
       case 'ARTICLE':
         return (
           <div className="mb-3">
-            <h3 className="text-xl font-semibold text-indigo-400 mb-2">{post.articleTitle}</h3>
+            <h3 className="text-xl font-semibold text-zinc-400 mb-2">{post.articleTitle}</h3>
             <p className="text-zinc-200 whitespace-pre-wrap line-clamp-3">{post.articleContent}</p>
-            <button className="text-indigo-400 hover:text-indigo-300 text-sm mt-2">
+            <button className="text-zinc-400 hover:text-zinc-300 text-sm mt-2">
               Read full article →
             </button>
           </div>
@@ -201,110 +199,25 @@ const Home = () => {
     }
   }
 
-  const features = [
-    {
-      icon: Code2,
-      title: 'Smart Skills Detection',
-      description: 'Automatically extracts your technical skills from GitHub repositories with proficiency levels.'
-    },
-    {
-      icon: BarChart3,
-      title: 'Portfolio Analytics',
-      description: 'Track profile views, project engagement, and visitor insights in real-time.'
-    },
-    {
-      icon: Users,
-      title: 'Developer Community',
-      description: 'Connect with other developers and showcase your journey together.'
-    }
-  ]
-
-  const stats = [
-    { number: '10K+', label: 'Active Developers' },
-    { number: '500K+', label: 'Skills Detected' },
-    { number: '50K+', label: 'Projects Showcased' },
-    { number: '99%', label: 'Satisfaction Rate' }
-  ]
-
   return (
     <div className="min-h-screen bg-zinc-950 text-white">
 
-      {/* Main Content Grid */}
-      <div className="container mx-auto px-6 py-8">
-        <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-
-          {/* Left Column - Hero & Features */}
-          <div className="lg:col-span-1 space-y-8">
-            {/* Hero Section */}
-            <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800">
-              <h1 className="text-3xl font-bold mb-4 leading-tight">
-                Showcase Your
-                <span className="text-indigo-400 block">Developer Journey</span>
-              </h1>
-              <p className="text-indigo-300 mb-6 leading-relaxed">
-                A smart portfolio platform that automatically detects your skills from GitHub and connects you with the developer community.
-              </p>
-              {!user && (
-                <div className="space-y-3">
-                  <Link to="/register" className="block w-full">
-                    <Button className="w-full bg-indigo-500 hover:bg-indigo-400 text-white font-semibold">
-                      Start Building Your Portfolio
-                    </Button>
-                  </Link>
-                  {/* <Link to="/login" className="block w-full">
-                    <Button variant="outline" className="w-full border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-white">
-                      See Demo
-                    </Button>
-                  </Link> */}
-                </div>
-              )}
-            </div>
-
-            {/* Stats Section */}
-            <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800">
-              <div className="grid grid-cols-2 gap-4">
-                {stats.map((stat, index) => (
-                  <div key={index} className="text-center">
-                    <div className="text-2xl font-bold text-indigo-400 mb-1">{stat.number}</div>
-                    <div className="text-indigo-300 text-sm">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Features */}
-            <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800">
-              <h3 className="text-lg font-bold mb-4">Why SkillSync?</h3>
-              <div className="space-y-4">
-                {features.map((feature, index) => (
-                  <div key={index} className="flex items-start space-x-3">
-                    <div className="w-10 h-10 bg-gradient-to-r from-indigo-400 to-indigo-300 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <feature.icon className="text-zinc-100" size={20} />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white text-sm">{feature.title}</h4>
-                      <p className="text-indigo-300 text-xs mt-1">{feature.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Middle Column - Feed & Post Creation */}
-          <div className="lg:col-span-2">
-            {/* Create Post Card - Only show if user is logged in */}
+      {/* Main Content */}
+      <div className="flex w-full">
+        {/* Middle Column - Feed & Post Creation */}
+        <div className="w-full max-w-[600px] border-r border-zinc-800 min-h-screen pb-20">
+          {/* Create Post Card - Only show if user is logged in */}
             {user && (
-              <Card className="p-6 bg-zinc-900 border-zinc-800 mb-6">
-                <div className="flex space-x-4 mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-zinc-900 to-zinc-400 rounded-2xl flex items-center justify-center">
+              <div className="p-4 border-b border-zinc-800">
+                <div className="flex space-x-4 mb-2">
+                  <div className="w-10 h-10 bg-gradient-to-r from-zinc-900 to-zinc-400 rounded-full flex items-center justify-center flex-shrink-0">
                     <span className="text-white font-bold text-sm">
                       {user?.profile?.name?.charAt(0) || 'U'}
                     </span>
                   </div>
                   <div className="flex-1">
                     {/* Post Type Tabs */}
-                    <div className="flex space-x-2 mb-4 border-b border-zinc-800">
+                    <div className="flex space-x-4 mb-4">
                       {[
                         { key: 'text', icon: Type, label: 'Text' },
                         { key: 'image', icon: Image, label: 'Image' },
@@ -314,41 +227,44 @@ const Home = () => {
                         <button
                           key={key}
                           onClick={() => setActiveTab(key)}
-                          className={`flex items-center space-x-1 px-3 py-2 border-b-2 transition-colors ${
+                          className={`flex items-center space-x-1 pb-2 border-b-2 transition-colors ${
                             activeTab === key 
-                              ? 'border-indigo-400 text-indigo-400' 
-                              : 'border-transparent text-zinc-400 hover:text-indigo-300'
+                              ? 'border-zinc-400 text-zinc-400' 
+                              : 'border-transparent text-zinc-500 hover:text-zinc-300'
                           }`}
                         >
                           <Icon size={16} />
-                          <span className="text-sm">{label}</span>
+                          <span className="text-sm font-medium">{label}</span>
                         </button>
                       ))}
                     </div>
 
                     {/* Text Post Form */}
                     {activeTab === 'text' && (
-                      <div className="space-y-4">
+                      <div className="space-y-3">
                         <textarea
                           value={textContent}
                           onChange={(e) => setTextContent(e.target.value)}
-                          placeholder="What's on your mind?"
-                          className="w-full p-3 bg-zinc-950 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent resize-none placeholder-zinc-400"
+                          placeholder="What is happening?!"
+                          className="w-full bg-transparent text-xl text-white focus:outline-none resize-none placeholder-zinc-500"
                           rows="3"
                         />
                         <Input
                           value={textTags}
                           onChange={(e) => setTextTags(e.target.value)}
                           placeholder="Add tags (comma separated)"
-                          className="bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
+                          className="bg-zinc-950 border-none text-zinc-400 placeholder-zinc-600 px-0"
                         />
-                        <div className="flex justify-end">
+                        <div className="flex justify-between items-center border-t border-zinc-800 pt-3">
+                          <div className="flex space-x-2 text-zinc-400">
+                            <button className="p-2 hover:bg-zinc-400/10 rounded-full transition-colors"><Image size={20} /></button>
+                            <button className="p-2 hover:bg-zinc-400/10 rounded-full transition-colors"><Code size={20} /></button>
+                          </div>
                           <Button 
                             onClick={handleCreateTextPost} 
-                            disabled={loading}
-                            className="bg-indigo-500 hover:bg-indigo-400 text-white"
+                            disabled={loading || !textContent.trim()}
+                            className="bg-zinc-500 hover:bg-zinc-400 text-white rounded-full px-6 font-bold disabled:opacity-50"
                           >
-                            <Send size={16} className="mr-2" />
                             {loading ? 'Posting...' : 'Post'}
                           </Button>
                         </div>
@@ -357,12 +273,12 @@ const Home = () => {
 
                     {/* Image Post Form */}
                     {activeTab === 'image' && (
-                      <div className="space-y-4">
+                      <div className="space-y-3">
                         <textarea
                           value={imageContent}
                           onChange={(e) => setImageContent(e.target.value)}
                           placeholder="Describe your images..."
-                          className="w-full p-3 bg-zinc-950 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent resize-none placeholder-zinc-400"
+                          className="w-full bg-transparent text-xl text-white focus:outline-none resize-none placeholder-zinc-500"
                           rows="2"
                         />
                         <input
@@ -370,21 +286,20 @@ const Home = () => {
                           multiple
                           accept="image/*"
                           onChange={handleFileSelect}
-                          className="w-full p-2 bg-zinc-950 border border-zinc-800 text-white rounded-2xl file:bg-indigo-400 file:text-zinc-100 file:border-0 file:rounded-lg file:px-4 file:py-2 file:mr-4"
+                          className="w-full text-sm text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-zinc-500 file:text-white hover:file:bg-zinc-400 cursor-pointer"
                         />
                         <Input
                           value={imageTags}
                           onChange={(e) => setImageTags(e.target.value)}
                           placeholder="Add tags (comma separated)"
-                          className="bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
+                          className="bg-zinc-950 border-none text-zinc-400 placeholder-zinc-600 px-0"
                         />
-                        <div className="flex justify-end">
+                        <div className="flex justify-end border-t border-zinc-800 pt-3">
                           <Button 
                             onClick={handleCreateImagePost} 
-                            disabled={loading}
-                            className="bg-indigo-500 hover:bg-indigo-400 text-white"
+                            disabled={loading || (!imageContent.trim() && imageFiles.length === 0)}
+                            className="bg-zinc-500 hover:bg-zinc-400 text-white rounded-full px-6 font-bold disabled:opacity-50"
                           >
-                            <Send size={16} className="mr-2" />
                             {loading ? 'Posting...' : 'Post'}
                           </Button>
                         </div>
@@ -393,33 +308,32 @@ const Home = () => {
 
                     {/* Article Post Form */}
                     {activeTab === 'article' && (
-                      <div className="space-y-4">
+                      <div className="space-y-3">
                         <Input
                           value={articleTitle}
                           onChange={(e) => setArticleTitle(e.target.value)}
                           placeholder="Article title"
-                          className="bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
+                          className="bg-transparent border-none text-xl font-bold text-white placeholder-zinc-500 px-0"
                         />
                         <textarea
                           value={articleContent}
                           onChange={(e) => setArticleContent(e.target.value)}
                           placeholder="Write your article..."
-                          className="w-full p-3 bg-zinc-950 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent resize-none placeholder-zinc-400"
+                          className="w-full bg-transparent text-lg text-white focus:outline-none resize-none placeholder-zinc-500"
                           rows="4"
                         />
                         <Input
                           value={articleTags}
                           onChange={(e) => setArticleTags(e.target.value)}
                           placeholder="Add tags (comma separated)"
-                          className="bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
+                          className="bg-zinc-950 border-none text-zinc-400 placeholder-zinc-600 px-0"
                         />
-                        <div className="flex justify-end">
+                        <div className="flex justify-end border-t border-zinc-800 pt-3">
                           <Button 
                             onClick={handleCreateArticlePost} 
-                            disabled={loading}
-                            className="bg-indigo-500 hover:bg-indigo-400 text-white"
+                            disabled={loading || !articleTitle.trim() || !articleContent.trim()}
+                            className="bg-zinc-500 hover:bg-zinc-400 text-white rounded-full px-6 font-bold disabled:opacity-50"
                           >
-                            <Send size={16} className="mr-2" />
                             {loading ? 'Publishing...' : 'Publish'}
                           </Button>
                         </div>
@@ -428,42 +342,41 @@ const Home = () => {
 
                     {/* Code Post Form */}
                     {activeTab === 'code' && (
-                      <div className="space-y-4">
+                      <div className="space-y-3">
                         <textarea
                           value={codeContent}
                           onChange={(e) => setCodeContent(e.target.value)}
                           placeholder="Describe your code..."
-                          className="w-full p-3 bg-zinc-950 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent resize-none placeholder-zinc-400"
+                          className="w-full bg-transparent text-xl text-white focus:outline-none resize-none placeholder-zinc-500"
                           rows="2"
                         />
                         <textarea
                           value={codeSnippet}
                           onChange={(e) => setCodeSnippet(e.target.value)}
                           placeholder="Paste your code here..."
-                          className="w-full p-3 bg-zinc-950 border border-zinc-800 text-white rounded-2xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent font-mono text-sm resize-none placeholder-zinc-400"
+                          className="w-full p-4 bg-zinc-900 border border-zinc-800 text-zinc-300 rounded-xl focus:outline-none font-mono text-sm resize-none placeholder-zinc-600"
                           rows="4"
                         />
-                        <div className="flex gap-2">
+                        <div className="flex gap-4">
                           <Input
                             value={codeLanguage}
                             onChange={(e) => setCodeLanguage(e.target.value)}
-                            placeholder="Programming language"
-                            className="flex-1 bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
+                            placeholder="Language"
+                            className="flex-1 bg-transparent border-b border-zinc-800 rounded-none px-0 text-white placeholder-zinc-600 focus:border-zinc-400"
                           />
                           <Input
                             value={codeTags}
                             onChange={(e) => setCodeTags(e.target.value)}
-                            placeholder="Tags (comma separated)"
-                            className="flex-1 bg-zinc-950 border-zinc-800 text-white placeholder-zinc-400"
+                            placeholder="Tags"
+                            className="flex-1 bg-transparent border-b border-zinc-800 rounded-none px-0 text-white placeholder-zinc-600 focus:border-zinc-400"
                           />
                         </div>
-                        <div className="flex justify-end">
+                        <div className="flex justify-end border-t border-zinc-800 pt-3">
                           <Button 
                             onClick={handleCreateCodePost} 
-                            disabled={loading}
-                            className="bg-indigo-500 hover:bg-indigo-400 text-white"
+                            disabled={loading || !codeContent.trim() || !codeSnippet.trim()}
+                            className="bg-zinc-500 hover:bg-zinc-400 text-white rounded-full px-6 font-bold disabled:opacity-50"
                           >
-                            <Send size={16} className="mr-2" />
                             {loading ? 'Posting...' : 'Post'}
                           </Button>
                         </div>
@@ -471,101 +384,176 @@ const Home = () => {
                     )}
                   </div>
                 </div>
-              </Card>
+              </div>
             )}
 
             {/* Feed */}
-            <div className="bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden">
-              {/* Feed Header */}
-              <div className="p-4 border-b border-zinc-800">
-                <h2 className="text-xl font-bold">Developer Community Feed</h2>
-                <p className="text-indigo-300 text-sm mt-1">
-                  {user ? 'See what developers are building and sharing' : 'Sign in to join the conversation'}
-                </p>
-              </div>
-
-              {/* Posts Feed */}
-              <div className="divide-y divide-zinc-800">
-                {posts.length === 0 ? (
-                  <div className="p-8 text-center text-indigo-300">
-                    {user ? 'No posts yet. Be the first to share something!' : 'Sign in to see posts from the community'}
-                  </div>
-                ) : (
-                  posts.map(post => (
-                    <div key={post.id} className="p-4 hover:bg-zinc-950 transition-colors duration-200">
-                      <div className="flex space-x-4">
-                        <div className="w-12 h-12 bg-gradient-to-r from-zinc-900 to-zinc-400 rounded-2xl flex items-center justify-center">
-                          <span className="text-white font-bold text-sm">
-                            {post.userName?.charAt(0) || 'U'}
+            <div className="divide-y divide-zinc-800">
+              {posts.length === 0 ? (
+                <div className="p-8 text-center text-zinc-500">
+                  {user ? 'No posts yet. Be the first to share something!' : 'Sign in to see posts from the community'}
+                </div>
+              ) : (
+                posts.map(post => (
+                  <div key={post.id} className="p-4 hover:bg-zinc-900/50 transition-colors duration-200 cursor-pointer">
+                    <div className="flex space-x-3">
+                      <div className="w-10 h-10 bg-gradient-to-r from-zinc-800 to-zinc-600 rounded-full flex items-center justify-center flex-shrink-0">
+                        <span className="text-white font-bold text-sm">
+                          {post.userName?.charAt(0) || 'U'}
+                        </span>
+                      </div>
+                      
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center space-x-1 mb-1">
+                          <h3 className="font-bold text-white truncate hover:underline">{post.userName}</h3>
+                          {post.userGithubUsername && (
+                            <span className="text-zinc-500 text-sm truncate">@{post.userGithubUsername}</span>
+                          )}
+                          <span className="text-zinc-600 text-sm">·</span>
+                          <span className="text-zinc-500 text-sm hover:underline">
+                            {new Date(post.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
                           </span>
                         </div>
                         
-                        <div className="flex-1">
-                          <div className="flex items-center space-x-2 mb-2">
-                            <h3 className="font-semibold text-white">{post.userName}</h3>
-                            <span className="text-zinc-400 text-sm">@{post.userGithubUsername}</span>
-                            <span className="text-zinc-800 text-sm">•</span>
-                            <span className="text-zinc-400 text-sm">
-                              {new Date(post.createdAt).toLocaleDateString()}
-                            </span>
-                            <span className="px-2 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs capitalize">
-                              {post.postType?.toLowerCase()}
-                            </span>
+                        {renderPostContent(post)}
+                        
+                        {post.tags && post.tags.length > 0 && (
+                          <div className="flex flex-wrap gap-2 mb-3 mt-2">
+                            {post.tags.map(tag => (
+                              <span key={tag} className="text-zinc-400 hover:underline text-sm">
+                                #{tag}
+                              </span>
+                            ))}
                           </div>
-                          
-                          {renderPostContent(post)}
-                          
-                          {post.tags && post.tags.length > 0 && (
-                            <div className="flex flex-wrap gap-1 mb-3">
-                              {post.tags.map(tag => (
-                                <span key={tag} className="bg-zinc-800 text-zinc-300 px-2 py-1 rounded-xl text-xs">
-                                  #{tag}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                          
-                          <div className="flex space-x-6 text-zinc-400">
-                            <button 
-                              onClick={() => handleLike(post.id)}
-                              className="flex items-center space-x-1 hover:text-red-500 transition-colors"
-                            >
-                              <Heart size={18} />
-                              <span>{post.likes || 0}</span>
-                            </button>
-                            <button className="flex items-center space-x-1 hover:text-indigo-400 transition-colors">
+                        )}
+                        
+                        <div className="flex justify-between text-zinc-500 mt-3 max-w-md">
+                          <button className="flex items-center space-x-2 hover:text-zinc-200 transition-colors group">
+                            <div className="p-2 rounded-full group-hover:bg-zinc-400/10 transition-colors">
                               <MessageCircle size={18} />
-                              <span>{post.comments || 0}</span>
-                            </button>
-                            <button className="flex items-center space-x-1 hover:text-indigo-400 transition-colors">
+                            </div>
+                            <span className="text-sm">{post.comments || 0}</span>
+                          </button>
+                          <button className="flex items-center space-x-2 hover:text-green-500 transition-colors group">
+                            <div className="p-2 rounded-full group-hover:bg-green-500/10 transition-colors">
                               <Share size={18} />
-                              <span>{post.shares || 0}</span>
-                            </button>
-                          </div>
+                            </div>
+                            <span className="text-sm">{post.shares || 0}</span>
+                          </button>
+                          <button 
+                            onClick={(e) => { e.stopPropagation(); handleLike(post.id); }}
+                            className="flex items-center space-x-2 hover:text-pink-500 transition-colors group"
+                          >
+                            <div className="p-2 rounded-full group-hover:bg-pink-500/10 transition-colors">
+                              <Heart size={18} />
+                            </div>
+                            <span className="text-sm">{post.likes || 0}</span>
+                          </button>
+                          <button className="flex items-center space-x-2 hover:text-zinc-200 transition-colors group">
+                            <div className="p-2 rounded-full group-hover:bg-zinc-400/10 transition-colors">
+                              <BarChart3 size={18} />
+                            </div>
+                          </button>
                         </div>
                       </div>
                     </div>
-                  ))
-                )}
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+
+          {/* Right Column - Search & Trending */}
+          <div className="hidden lg:block w-[350px] pl-8 py-2 space-y-4">
+            {/* Search Bar */}
+            <div className="sticky top-[72px] z-10 bg-zinc-950 pb-2">
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <svg className="h-5 w-5 text-zinc-500 group-focus-within:text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="block w-full pl-11 pr-4 py-3 bg-zinc-900 border border-transparent rounded-full text-white placeholder-zinc-500 focus:bg-zinc-950 focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 transition-colors"
+                />
               </div>
             </div>
 
-            {/* CTA Section for non-logged in users */}
-            {!user && (
-              <div className="mt-6 bg-zinc-900 rounded-2xl p-6 text-center">
-                <h3 className="text-xl font-bold mb-2">Ready to Join the Community?</h3>
-                <p className="text-zinc-200 mb-4">Create your profile and start sharing your developer journey today.</p>
-                <Link to="/register">
-                  <Button className="bg-blue-600 text-white hover:bg-blue-500 font-semibold">
-                    <Star className="mr-2" size={16} />
-                    Join SkillSync Free
-                  </Button>
-                </Link>
+            {/* Relevant People */}
+            <div className="bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden">
+              <h2 className="font-extrabold text-xl p-4 text-white">Relevant people</h2>
+              
+              {[
+                { name: 'Alex Chen', handle: '@alexc_dev', initials: 'AC', color: 'from-blue-600 to-blue-400', bio: 'Full-stack engineer building the future of web.' },
+                { name: 'Sarah Jenkins', handle: '@sarahcodes', initials: 'SJ', color: 'from-purple-600 to-purple-400', bio: 'React & Node.js enthusiast. Open source contributor.' },
+                { name: 'David Kumar', handle: '@davidk_tech', initials: 'DK', color: 'from-emerald-600 to-emerald-400', bio: 'Cloud architect, AWS hero. Writing about serverless.' },
+                { name: 'Elena Rodriguez', handle: '@elenacodes', initials: 'ER', color: 'from-rose-600 to-rose-400', bio: 'UI/UX designer & Frontend dev. Creating beautiful experiences.' }
+              ].map((person, idx) => (
+                <div key={idx} className="p-4 hover:bg-zinc-800/50 transition-colors cursor-pointer border-b border-zinc-800/50 last:border-0">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center space-x-3">
+                      <div className={`w-10 h-10 bg-gradient-to-r ${person.color} rounded-full flex items-center justify-center flex-shrink-0`}>
+                        <span className="text-white font-bold">{person.initials}</span>
+                      </div>
+                      <div className="flex flex-col">
+                        <div className="flex items-center space-x-1">
+                          <h3 className="font-bold text-white hover:underline text-sm">{person.name}</h3>
+                          <svg className="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 24 24"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.918-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.337 2.25c-.416-.165-.866-.25-1.336-.25-2.21 0-3.918 1.79-3.918 4 0 .495.084.965.238 1.4-1.273.65-2.148 2.02-2.148 3.6 0 1.46.74 2.746 1.867 3.45-.066.305-.102.62-.102.95 0 2.21 1.71 3.998 3.918 3.998.47 0 .92-.084 1.336-.25C9.182 21.585 10.49 22.5 12 22.5s2.816-.917 3.337-2.25c.416.165.866.25 1.336.25 2.21 0 3.918-1.79 3.918-4 0-.33-.036-.645-.102-.95 1.127-.704 1.867-1.99 1.867-3.45zm-10.81 3.25l-3.25-3.25 1.414-1.414 1.836 1.836 5.836-5.836 1.414 1.414-7.25 7.25z"/></svg>
+                        </div>
+                        <p className="text-zinc-500 text-sm">{person.handle}</p>
+                      </div>
+                    </div>
+                    <button className="bg-white text-black font-bold py-1.5 px-4 rounded-full text-sm hover:bg-zinc-200 transition-colors">
+                      Follow
+                    </button>
+                  </div>
+                  <div className="text-sm text-white">
+                    {person.bio}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* What's happening */}
+            <div className="bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden">
+              <h2 className="font-extrabold text-xl p-4 text-white">What's happening</h2>
+              
+              {[
+                { category: 'Technology · Trending', title: 'React 19' },
+                { category: 'Programming · Trending', title: 'TypeScript 5.5' },
+                { category: 'Web Development · Trending', title: 'Next.js App Router' },
+                { category: 'Artificial Intelligence · Trending', title: 'OpenAI GPT-5' }
+              ].map((topic, idx) => (
+                <div key={idx} className="p-4 hover:bg-zinc-800/50 transition-colors cursor-pointer">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <p className="text-zinc-500 text-xs">{topic.category}</p>
+                      <p className="font-bold text-white mt-0.5">{topic.title}</p>
+                    </div>
+                    <MoreHorizontal size={16} className="text-zinc-500" />
+                  </div>
+                </div>
+              ))}
+              
+              <div className="p-4 hover:bg-zinc-800/50 transition-colors cursor-pointer">
+                <p className="text-zinc-400 hover:underline text-sm">Show more</p>
               </div>
-            )}
+            </div>
+
+            {/* Footer Links */}
+            <div className="px-4 flex flex-wrap gap-x-3 gap-y-1 text-xs text-zinc-500">
+              <a href="#" className="hover:underline">Terms of Service</a>
+              <a href="#" className="hover:underline">Privacy Policy</a>
+              <a href="#" className="hover:underline">Cookie Policy</a>
+              <a href="#" className="hover:underline">Accessibility</a>
+              <a href="#" className="hover:underline">Ads info</a>
+              <a href="#" className="hover:underline flex items-center">More <MoreHorizontal size={12} className="ml-1" /></a>
+              <span>© 2026 X Corp.</span>
+            </div>
           </div>
         </div>
-      </div>
     </div>
   )
 }

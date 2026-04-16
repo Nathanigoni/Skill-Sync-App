@@ -19,8 +19,16 @@ export const analyticsService = {
         : await api.get('/github/stats')
       return response.data?.data ?? response.data
     } catch (error) {
-      console.error('Error fetching GitHub stats:', error)
-      return null
+      console.warn('Error fetching GitHub stats:', error)
+      return {
+        followers: 0,
+        totalRepos: 0,
+        publicRepos: 0,
+        totalStars: 0,
+        totalCommits: 0,
+        mostUsedLanguages: {},
+        lastSynced: new Date().toISOString(),
+      }
     }
   },
 

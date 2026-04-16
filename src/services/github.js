@@ -4,15 +4,27 @@ const githubHeaders = {
   Accept: 'application/vnd.github+json',
 }
 
-const fetchPublicGitHubStats = async (username) => {
+const fetchPublicGitHubStats = async (username, throwOnError = false) => {
   const trimmed = username.toString().trim()
   const userRes = await fetch(`https://api.github.com/users/${encodeURIComponent(trimmed)}`, {
     headers: githubHeaders,
   })
   if (!userRes.ok) {
-    const error = new Error('Failed to fetch GitHub user')
-    error.status = userRes.status
-    throw error
+    if (throwOnError) {
+      const error = new Error('Failed to fetch GitHub user')
+      error.status = userRes.status
+      throw error
+    }
+    console.warn(`GitHub API returned ${userRes.status} for user ${trimmed}. Returning default stats.`)
+    return {
+      followers: 0,
+      totalRepos: 0,
+      publicRepos: 0,
+      totalStars: 0,
+      totalCommits: 0,
+      mostUsedLanguages: {},
+      lastSynced: new Date().toISOString(),
+    }
   }
   const userData = await userRes.json()
 
@@ -26,9 +38,13 @@ const fetchPublicGitHubStats = async (username) => {
       { headers: githubHeaders }
     )
     if (!reposRes.ok) {
-      const error = new Error('Failed to fetch GitHub repos')
-      error.status = reposRes.status
-      throw error
+      if (throwOnError) {
+        const error = new Error('Failed to fetch GitHub repos')
+        error.status = reposRes.status
+        throw error
+      }
+      console.warn(`GitHub API returned ${reposRes.status} for repos of user ${trimmed}.`)
+      break
     }
     const repos = await reposRes.json()
     if (!Array.isArray(repos) || repos.length === 0) break
@@ -64,13 +80,26 @@ const fetchPublicGitHubStats = async (username) => {
 }
 export const githubService = {
   async getGitHubStats(username) {
-    const trimmed = typeof username === 'string' ? username.trim() : ''
-    if (trimmed) {
-      return await fetchPublicGitHubStats(trimmed)
-    }
+    try {
+      const trimmed = typeof username === 'string' ? username.trim() : ''
+      if (trimmed) {
+        return await fetchPublicGitHubStats(trimmed)
+      }
 
-    const response = await api.get('/github/stats')
-    return response.data?.data ?? response.data
+      const response = await api.get('/github/stats')
+      return response.data?.data ?? response.data
+    } catch (error) {
+      console.warn('Failed to fetch GitHub stats from backend, returning defaults:', error)
+      return {
+        followers: 0,
+        totalRepos: 0,
+        publicRepos: 0,
+        totalStars: 0,
+        totalCommits: 0,
+        mostUsedLanguages: {},
+        lastSynced: new Date().toISOString(),
+      }
+    }
   },
   async connectGitHub(username) {
     const trimmed = typeof username === 'string' ? username.trim() : ''
@@ -91,13 +120,26 @@ export const githubService = {
     }
   },
   async syncGitHubData(username) {
-    const trimmed = typeof username === 'string' ? username.trim() : ''
-    if (trimmed) {
-      return await fetchPublicGitHubStats(trimmed)
-    }
+    try {
+      const trimmed = typeof username === 'string' ? username.trim() : ''
+      if (trimmed) {
+        return await fetchPublicGitHubStats(trimmed)
+      }
 
-    const response = await api.post('/github/sync')
-    return response.data?.data ?? response.data
+      const response = await api.post('/github/sync')
+      return response.data?.data ?? response.data
+    } catch (error) {
+      console.warn('Failed to sync GitHub data, returning defaults:', error)
+      return {
+        followers: 0,
+        totalRepos: 0,
+        publicRepos: 0,
+        totalStars: 0,
+        totalCommits: 0,
+        mostUsedLanguages: {},
+        lastSynced: new Date().toISOString(),
+      }
+    }
   },
   getRepos: async (username) => {
     const response = await fetch(`https://api.github.com/users/${username}/repos`)

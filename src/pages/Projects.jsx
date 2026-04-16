@@ -91,7 +91,7 @@ const Projects = () => {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-indigo-300 border-t-zinc-900 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-zinc-300 border-t-zinc-900 mx-auto mb-4"></div>
           <p className="text-zinc-400">Loading projects...</p>
         </div>
       </div>
@@ -114,7 +114,7 @@ const Projects = () => {
         
         <Button 
           onClick={() => setShowForm(true)} 
-          className="bg-gradient-to-r from-indigo-500 to-indigo-400 text-white font-semibold hover:shadow-md transition-all duration-300"
+          className="bg-gradient-to-r from-zinc-500 to-zinc-400 text-white font-semibold hover:shadow-md transition-all duration-300"
         >
           <Plus className="mr-2" size={20} />
           Add Project
@@ -129,7 +129,7 @@ const Projects = () => {
               <h2 className="text-xl font-bold text-zinc-100">
                 {editingProject ? 'Edit Project' : 'Create New Project'}
               </h2>
-              <div className="w-10 h-10 bg-gradient-to-r from-indigo-400 to-indigo-300 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-r from-zinc-400 to-zinc-300 rounded-lg flex items-center justify-center">
                 <Folder className="text-zinc-100" size={20} />
               </div>
             </div>
@@ -151,7 +151,7 @@ const Projects = () => {
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
                   rows={4}
-                  className="w-full px-3 py-2 border border-zinc-800 rounded-lg bg-zinc-950 text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-zinc-800 rounded-lg bg-zinc-950 text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:border-transparent"
                   placeholder="Describe your project and its key features"
                   required
                 />
@@ -167,10 +167,10 @@ const Projects = () => {
                     value={techInput}
                     onChange={(e) => setTechInput(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTech())}
-                    className="flex-1 px-3 py-2 border border-zinc-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
+                    className="flex-1 px-3 py-2 border border-zinc-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:border-transparent"
                     placeholder="Add technology (e.g., React, Node.js)"
                   />
-                  <Button type="button" onClick={addTech} className="bg-indigo-500 hover:bg-indigo-400 text-white font-medium">
+                  <Button type="button" onClick={addTech} className="bg-zinc-500 hover:bg-zinc-400 text-white font-medium">
                     Add
                   </Button>
                 </div>
@@ -184,7 +184,7 @@ const Projects = () => {
                       <button
                         type="button"
                         onClick={() => removeTech(tech)}
-                        className="hover:text-zinc-400 text-xs"
+                        className="hover:text-zinc-200 text-xs"
                       >
                         ×
                       </button>
@@ -217,16 +217,16 @@ const Projects = () => {
                   id="featured"
                   checked={formData.featured}
                   onChange={(e) => setFormData({...formData, featured: e.target.checked})}
-                  className="rounded border-zinc-400 text-indigo-400 focus:ring-indigo-400"
+                  className="rounded border-zinc-400 text-zinc-400 focus:ring-zinc-400"
                 />
                 <label htmlFor="featured" className="flex items-center gap-2 text-sm font-medium text-zinc-100">
-                  <Star size={16} className="text-indigo-400" />
+                  <Star size={16} className="text-zinc-400" />
                   Feature this project on your profile
                 </label>
               </div>
 
               <div className="flex gap-3 pt-4 border-t border-zinc-800">
-                <Button type="submit" className="flex-1 bg-gradient-to-r from-indigo-500 to-indigo-400 text-white font-semibold hover:shadow-md transition-all">
+                <Button type="submit" className="flex-1 bg-gradient-to-r from-zinc-500 to-zinc-400 text-white font-semibold hover:shadow-md transition-all">
                   {editingProject ? 'Update Project' : 'Create Project'}
                 </Button>
                 <Button
@@ -261,18 +261,18 @@ const Projects = () => {
             const techStack = Array.isArray(project.techStack) ? project.techStack : []
 
             return (
-              <Card key={project.id} className="p-6 border border-zinc-800 hover:border-indigo-400 transition-all duration-300 hover:shadow-md">
+              <Card key={project.id} className="p-6 border border-zinc-800 hover:border-zinc-400 transition-all duration-300 hover:shadow-md">
               {/* Project Header */}
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center space-x-3 flex-1 min-w-0">
-                  <div className="w-12 h-12 bg-gradient-to-r from-indigo-400 to-indigo-300 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-gradient-to-r from-zinc-400 to-zinc-300 rounded-lg flex items-center justify-center flex-shrink-0">
                     <Folder className="text-zinc-100" size={20} />
                   </div>
                   <div className="min-w-0 flex-1">
                     <h3 className="font-semibold text-zinc-100 truncate text-lg">{project.title}</h3>
                     <div className="flex items-center space-x-2 mt-1">
                       {project.featured && (
-                        <span className="inline-flex items-center space-x-1 bg-gradient-to-r from-indigo-500 to-indigo-400 text-white px-2 py-1 rounded-full text-xs font-medium">
+                        <span className="inline-flex items-center space-x-1 bg-gradient-to-r from-zinc-500 to-zinc-400 text-white px-2 py-1 rounded-full text-xs font-medium">
                           <Star size={12} />
                           <span>Featured</span>
                         </span>
@@ -378,7 +378,7 @@ const Projects = () => {
         </div>
       ) : (
         <Card className="text-center py-16 border border-zinc-800">
-          <div className="w-20 h-20 bg-gradient-to-r from-indigo-400 to-indigo-300 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <div className="w-20 h-20 bg-gradient-to-r from-zinc-400 to-zinc-300 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <Folder className="text-zinc-100" size={32} />
           </div>
           <h3 className="text-xl font-bold text-zinc-100 mb-3">No projects yet</h3>
@@ -387,7 +387,7 @@ const Projects = () => {
           </p>
           <Button 
             onClick={() => setShowForm(true)} 
-            className="bg-gradient-to-r from-indigo-500 to-indigo-400 text-white font-semibold hover:shadow-md transition-all duration-300"
+            className="bg-gradient-to-r from-zinc-500 to-zinc-400 text-white font-semibold hover:shadow-md transition-all duration-300"
           >
             <Plus className="mr-2" size={20} />
             Create Your First Project

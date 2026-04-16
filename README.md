@@ -97,3 +97,7 @@ Key pieces:
 - `server.js`: mock API + GitHub stats/skills fetch logic
 
 ---
+
+npm install
+npm run dev
+to run the app

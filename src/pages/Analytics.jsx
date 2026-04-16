@@ -61,7 +61,7 @@ const Analytics = () => {
       <div className="flex justify-center items-center h-96">
         <div className="text-center">
           <div className="relative">
-            <div className="animate-spin rounded-full h-16 w-16 border-4 border-indigo-400 border-t-zinc-900 mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-16 w-16 border-4 border-zinc-400 border-t-zinc-900 mx-auto mb-4"></div>
             <Activity className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-zinc-100" size={20} />
           </div>
           <p className="text-zinc-400 mt-4">Loading analytics data...</p>
@@ -77,7 +77,7 @@ const Analytics = () => {
       icon: Eye,
       description: 'People who viewed your profile',
       trend: '+12%',
-      color: 'from-indigo-400 to-zinc-400'
+      color: 'from-zinc-400 to-zinc-400'
     },
     {
       title: 'Project Views',
@@ -85,7 +85,7 @@ const Analytics = () => {
       icon: TrendingUp,
       description: 'Total project impressions',
       trend: '+23%',
-      color: 'from-indigo-300 to-indigo-400'
+      color: 'from-zinc-300 to-zinc-400'
     },
     {
       title: 'Project Clicks',
@@ -101,7 +101,7 @@ const Analytics = () => {
       icon: Users,
       description: 'Total individual visitors',
       trend: '+15%',
-      color: 'from-zinc-900 to-indigo-300'
+      color: 'from-zinc-900 to-zinc-300'
     }
   ]
 
@@ -142,7 +142,7 @@ const Analytics = () => {
         {statCards.map((stat, index) => (
           <Card 
             key={index} 
-            className="p-6 border border-zinc-800 hover:border-indigo-400 transition-all duration-300 hover:shadow-md"
+            className="p-6 border border-zinc-800 hover:border-zinc-400 transition-all duration-300 hover:shadow-md"
           >
             <div className="flex items-start justify-between mb-4">
               <div className={`p-3 bg-gradient-to-r ${stat.color} rounded-xl shadow-sm`}>
@@ -169,7 +169,7 @@ const Analytics = () => {
         {/* Engagement Rate Card */}
         <Card className="p-6 border border-zinc-800">
           <div className="flex items-center space-x-3 mb-6">
-            <div className="p-2 bg-indigo-400 rounded-lg">
+            <div className="p-2 bg-zinc-400 rounded-lg">
               <Target className="text-zinc-100" size={20} />
             </div>
             <div>
@@ -188,7 +188,7 @@ const Analytics = () => {
               </div>
               <div className="w-full bg-zinc-800 rounded-full h-2">
                 <div
-                  className="bg-gradient-to-r from-indigo-400 to-zinc-400 h-2 rounded-full transition-all duration-1000 ease-out"
+                  className="bg-gradient-to-r from-zinc-400 to-zinc-400 h-2 rounded-full transition-all duration-1000 ease-out"
                   style={{ width: `${engagementRate}%` }}
                 ></div>
               </div>
@@ -202,7 +202,7 @@ const Analytics = () => {
         {/* Profile Engagement Card */}
         <Card className="p-6 border border-zinc-800">
           <div className="flex items-center space-x-3 mb-6">
-            <div className="p-2 bg-indigo-300 rounded-lg">
+            <div className="p-2 bg-zinc-300 rounded-lg">
               <User className="text-zinc-100" size={20} />
             </div>
             <div>
@@ -221,7 +221,7 @@ const Analytics = () => {
               </div>
               <div className="w-full bg-zinc-800 rounded-full h-2">
                 <div
-                  className="bg-gradient-to-r from-indigo-300 to-indigo-400 h-2 rounded-full transition-all duration-1000 ease-out"
+                  className="bg-gradient-to-r from-zinc-300 to-zinc-400 h-2 rounded-full transition-all duration-1000 ease-out"
                   style={{ width: `${profileEngagement}%` }}
                 ></div>
               </div>
@@ -251,13 +251,13 @@ const Analytics = () => {
               label: 'Avg. Daily Views', 
               value: timeRange ? Math.round((stats?.profileViews || 0) / timeRange) : 0,
               icon: Eye,
-              color: 'text-indigo-400'
+              color: 'text-zinc-400'
             },
             { 
               label: 'Peak Activity', 
               value: '2:00 PM',
               icon: TrendingUp,
-              color: 'text-indigo-300'
+              color: 'text-zinc-300'
             },
             { 
               label: 'Bounce Rate', 
@@ -272,7 +272,7 @@ const Analytics = () => {
               color: 'text-zinc-100'
             }
           ].map((metric, index) => (
-            <div key={index} className="text-center p-4 border border-zinc-800 rounded-lg hover:border-indigo-400 transition-colors">
+            <div key={index} className="text-center p-4 border border-zinc-800 rounded-lg hover:border-zinc-400 transition-colors">
               <metric.icon className={`${metric.color} mx-auto mb-2`} size={20} />
               <div className="text-2xl font-bold text-zinc-100 mb-1">{metric.value}</div>
               <div className="text-sm text-zinc-400">{metric.label}</div>
@@ -284,7 +284,7 @@ const Analytics = () => {
       {/* Empty State */}
       {(!stats || Object.values(stats).every(val => val === 0)) && (
         <Card className="text-center py-12 border border-zinc-800">
-          <div className="w-16 h-16 bg-gradient-to-r from-indigo-400 to-indigo-300 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-gradient-to-r from-zinc-400 to-zinc-300 rounded-2xl flex items-center justify-center mx-auto mb-4">
             <TrendingUp className="text-zinc-100" size={28} />
           </div>
           <h3 className="text-xl font-bold text-zinc-100 mb-3">
@@ -293,7 +293,7 @@ const Analytics = () => {
           <p className="text-zinc-400 max-w-md mx-auto mb-6">
             Your analytics will appear here once you start sharing your portfolio and receiving visits.
           </p>
-          <button className="bg-gradient-to-r from-indigo-500 to-indigo-400 text-white font-semibold px-6 py-2 rounded-lg hover:shadow-md transition-all duration-300">
+          <button className="bg-gradient-to-r from-zinc-500 to-zinc-400 text-white font-semibold px-6 py-2 rounded-lg hover:shadow-md transition-all duration-300">
             Share Your Profile
           </button>
         </Card>
